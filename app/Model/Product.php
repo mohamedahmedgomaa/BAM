@@ -5,6 +5,10 @@ namespace App\Model;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static withCount(array $array)
+ * @method static where(string $string, string $string1, string $string2)
+ */
 class Product extends Model
 {
     
