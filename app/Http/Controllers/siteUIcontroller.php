@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Departments;
+use App\User;
 use App\Model\Product;
 use App\Model\Setting;
 
@@ -44,4 +45,19 @@ class siteUIcontroller extends Controller
             ->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get();
         return view('index', compact('footerTopProduct'));
     }
+
+    public function shopshow() {
+        $shopshow = User::all();
+        return view('adminshop_show', compact('shopshow'))
+        ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
+        ->with('categories', Departments::all()->take(5));
+    }
+
+    public function allProduct() {
+        $allProducts = Product::all();
+        return view('allProducts', compact('allProducts'))
+        ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
+        ->with('categories', Departments::all()->take(5));
+    }
+
 }

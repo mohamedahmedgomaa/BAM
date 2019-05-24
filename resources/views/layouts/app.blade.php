@@ -63,7 +63,7 @@
                         </li>
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
-                        <li class="float-left"><a href="{{ url('/homepage') }}">Homepage</a></li>
+                        <li class="float-left"><a href="{{ url('/homepage') }}">Top Product</a></li>
                         <li class="float-left"><a href="{{ url('statistics') }}">Statistics</a></li>
                         <li><a href="{{ url('/') }}">Home</a></li>
                     @else
@@ -79,7 +79,7 @@
                             </a>
                         </li>
                         <li class="float-left"><a href="{{ url('/') }}">Home</a></li>
-                        <li class="float-left"><a href="{{ url('/homepage') }}">Homepage</a></li>
+                        <li class="float-left"><a href="{{ url('/homepage') }}">Top Product</a></li>
                         <li class="float-left"><a href="{{ url('statistics') }}">Statistics</a></li>
                         {{-- // Category // --}}
                         @if (auth()->user()->hasRole('admin_shop'))

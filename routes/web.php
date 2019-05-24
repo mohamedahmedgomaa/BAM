@@ -19,9 +19,6 @@ Route::group(['middleware' => 'user:web'], function () {
 
     Route::get('/logout', 'HomeController@destroy');
 
-    Route::get('/homepage', 'PostController@products')->name('homepage');
-    Route::post('/homepage/store', 'PostController@store');
-    Route::post('/homepage/{product}/store', 'CommentController@store');
 
 
     ////////// Like & Dislike //////////////////
@@ -36,8 +33,16 @@ Route::group(['middleware' => 'user:web'], function () {
 
     //////////////////// Roles Admin Shop ////////////////////////
 
+    Route::post('/homepage/{product}/store', 'CommentController@store');
+    Route::get('/homepage', 'PostController@products')->name('homepage');
+    
     Route::group(['middleware' => 'roles', 'roles' => ['admin_shop']], function () {
 
+        ////////// Create Product ////////////////////
+        Route::get('/createProduct', 'PostController@createProduct')->name('homepage.createProduct');
+        Route::post('/homepage/store', 'PostController@store');
+        ////////// Create Product ////////////////////
+        
         ////////// Categories //////////////////
 
         Route::get('/categories', 'CatrgoriesController@index')->name('categories');
@@ -74,8 +79,8 @@ Route::get('maintenance', function () {
 Route::get('/statistics', 'PostController@statistics');
 
 Route::get('/', 'siteUIcontroller@index')->name('index');
-Route::get('/homepage/{product}', 'PostController@product');
 
+Route::get('/homepage/{product}', 'PostController@product');
 
 Route::get('/category/{id}', 'siteUIcontroller@showCategory')->name('category.show');
 
@@ -103,6 +108,14 @@ Route::get('/results', function () {
 });
 
 ///////////////////// Search /////////////////////
+
+
+//////////////  admin shop show ///////////////
+Route::get('/shopshow', 'siteUIcontroller@shopshow')->name('shopshow');
+//////////////  admin shop show ///////////////
+
+Route::get('/allProduct', 'siteUIcontroller@allProduct')->name('allProduct');
+
 
 
 

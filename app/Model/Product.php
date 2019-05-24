@@ -22,6 +22,7 @@ class Product extends Model
 		'size',
 		'weight',
         'category_id',
+        'user_id',
     ];
 
     public function comments() {

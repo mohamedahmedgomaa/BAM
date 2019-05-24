@@ -29,31 +29,23 @@
     <div class="top_menu">
         <div class="container">
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-6">
                     <div class="float-left">
                         <p>Name: {{setting()->sitename_en}}</p>
                         <p>email: {{setting()->email}}</p>
                     </div>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-6">
                     <div class="float-right">
                         <ul class="right_side">
                             @guest
-                                <li>
-                                    <a href="{{ route('login') }}">
-                                        log in
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('register') }}">
-                                        sign up
-                                    </a>
-                                </li>
-                                <li><a href="{{ url('statistics') }}">Statistics</a></li>
+                                <li><a href="{{ route('login') }}">log in</a></li>
+                                <li><a href="{{ route('register') }}">sign up</a></li>
+
                                 <li><a href="{{ url('/') }}">Home</a></li>
                             @else
-                                <li><a href="{{ url('homepage') }}">HomePage</a></li>
-                                <li><a href="{{ url('statistics') }}">Statistics</a></li>
+                                <li><a href="{{ url('homepage') }}">Top Product</a></li>
+
                                 {{-- // Category // --}}
                                 @if (auth()->user()->hasRole('admin_shop'))
                                     <li class="dropdown">
@@ -84,7 +76,7 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="{{ url('/') }}"><i class="fa fa-btn fa-home"></i> Home</a>
+                                            <a href="{{ url('/homepage') }}"><i class="fa fa-btn fa-home"></i> Top Product</a>
                                             <a href="{{ url('profile/'.auth()->id()) }}"><i
                                                         class="fa fa-btn fa-user"></i> Profile</a>
                                             <a href="{{ url('statistics') }}"><i class="fa fa-btn fa-user"></i>
@@ -137,7 +129,6 @@
                                 <li class="nav-item active">
                                     <a class="nav-link" href="/">Home</a>
                                 </li>
-                                {{-- @if(Auth::check()) --}}
                                 <li class="nav-item submenu dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true" aria-expanded="false">Categories</a>
@@ -150,7 +141,21 @@
                                         @endforeach
                                     </ul>
                                 </li>
-                                {{-- @endif --}}
+                                <li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true" aria-expanded="false">Pages</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="{{ url('statistics') }}" class="nav-link">Statistics</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('shopshow') }}" class="nav-link">All Shops</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('allProduct') }}" class="nav-link">All Products</a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Contact us</a>
                                 </li>
