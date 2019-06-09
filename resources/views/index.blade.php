@@ -14,10 +14,17 @@
     <div class="banner_inner d-flex align-items-center">
       <div class="container">
         <div class="banner_content row">
-          <div class="col-lg-12">
-{{--            <p class="sub text-uppercase">All : </p>--}}
+          <div class="col-lg-12" style="margin-top: -90px;">
+            {{-- <p class="sub text-uppercase">All : </p> --}}
             <h3><span>Show</span> Your <br />Personal <span>Style</span></h3>
             <h4>find which you want and buy it from us.</h4>
+            {{-- <a href="{{ route('allProduct') }}" class="main_btn mt-40" href="#">View All</a> --}}
+            <a class="button3D" href="{{ route('allProduct') }}">
+              <span>View All</span>
+              <span></span>
+              <span></span>
+              <span>View All</span>
+            </a>
           </div>
         </div>
       </div>
@@ -50,6 +57,40 @@
                 <a href="{{ route('product.addToCart', ['id' => $first_post->id]) }}">
                   <i class="ti-shopping-cart"></i>
                 </a>
+                @guest
+                <a href="{{ route('login') }}" class="icons">
+                    <i class="ti-heart" aria-hidden="true"></i>
+                </a>
+                @else
+                @php
+                    $like_count = 0;
+
+                    $like_status = "btn-secondry";
+                @endphp
+
+                @foreach ($first_post->likes as $like)
+                    @php
+                        if ($like->like == 1) {
+                            $like_count++;
+                        }
+
+
+
+                        if (Auth::check()) {
+
+                            if ($like->like == 1 && $like->user_id == Auth::user()->id) {
+                                $like_status = "btn-success";
+                            }
+                            
+                        }
+
+                    @endphp
+                @endforeach
+                <button type="button" data-productid="{{ $first_post->id }}_l" data-like="{{ $like_status }}"
+                        class="ti-heart like btn {{ $like_status }}" style="">
+                    <i aria-hidden="true"></i>
+                </button>
+                @endguest
               </div>
             </div>
             <div class="product-btm">
@@ -61,6 +102,11 @@
               </a>
               <div class="mt-3">
                 <span class="mr-4">{{ $first_post->price }} $</span>
+                @if($first_post->offer > 0 )
+                <del>{{ $first_post->offer }}</del>
+                @else
+                <del>No Offer</del>
+                @endif
               </div>
             </div>
           </div>
@@ -77,6 +123,40 @@
                 <a href="{{ route('product.addToCart', ['id' => $second_post->id]) }}">
                   <i class="ti-shopping-cart"></i>
                 </a>
+                @guest
+                <a href="{{ route('login') }}" class="icons">
+                    <i class="ti-heart" aria-hidden="true"></i>
+                </a>
+                @else
+                @php
+                    $like_count = 0;
+
+                    $like_status = "btn-secondry";
+                @endphp
+
+                @foreach ($second_post->likes as $like)
+                    @php
+                        if ($like->like == 1) {
+                            $like_count++;
+                        }
+
+
+
+                        if (Auth::check()) {
+
+                            if ($like->like == 1 && $like->user_id == Auth::user()->id) {
+                                $like_status = "btn-success";
+                            }
+                            
+                        }
+
+                    @endphp
+                @endforeach
+                <button type="button" data-productid="{{ $second_post->id }}_l" data-like="{{ $like_status }}"
+                        class="ti-heart like btn {{ $like_status }}" style="">
+                    <i aria-hidden="true"></i>
+                </button>
+                @endguest
               </div>
             </div>
             <div class="product-btm">
@@ -88,6 +168,11 @@
               </a>
               <div class="mt-3">
                 <span class="mr-4">{{ $second_post->price }} $</span>
+                @if($second_post->offer > 0 )
+                <del>{{ $second_post->offer }}</del>
+                @else
+                <del>No Offer</del>
+                @endif
               </div>
             </div>
           </div>
@@ -104,6 +189,40 @@
                 <a href="{{ route('product.addToCart', ['id' => $third_post->id]) }}">
                   <i class="ti-shopping-cart"></i>
                 </a>
+                @guest
+                <a href="{{ route('login') }}" class="icons">
+                    <i class="ti-heart" aria-hidden="true"></i>
+                </a>
+                @else
+                @php
+                    $like_count = 0;
+
+                    $like_status = "btn-secondry";
+                @endphp
+
+                @foreach ($third_post->likes as $like)
+                    @php
+                        if ($like->like == 1) {
+                            $like_count++;
+                        }
+
+
+
+                        if (Auth::check()) {
+
+                            if ($like->like == 1 && $like->user_id == Auth::user()->id) {
+                                $like_status = "btn-success";
+                            }
+                            
+                        }
+
+                    @endphp
+                @endforeach
+                <button type="button" data-productid="{{ $third_post->id }}_l" data-like="{{ $like_status }}"
+                        class="ti-heart like btn {{ $like_status }}" style="">
+                    <i aria-hidden="true"></i>
+                </button>
+                @endguest
               </div>
             </div>
             <div class="product-btm">
@@ -115,6 +234,11 @@
               </a>
               <div class="mt-3">
                 <span class="mr-4">{{ $third_post->price }} $</span>
+                @if($third_post->offer > 0 )
+                <del>{{ $third_post->offer }}</del>
+                @else
+                <del>No Offer</del>
+                @endif
               </div>
             </div>
           </div>
@@ -132,8 +256,14 @@
           <div class="offer_content">
             <h3 class="text-uppercase mb-40">offer</h3>
             <h2 class="text-uppercase">50% off</h2>
-{{--            <a href="#" class="main_btn mb-20 mt-5">Discover Now</a>--}}<br>
-            <p>Limited Time Offer</p>
+            {{-- <a href="{{ route('allOffer') }}" class="main_btn mb-20 mt-5">Show Offers</a> --}}
+            <a class="button3D" href="{{ route('allOffer') }}" style="left: 200px;">
+              <span>Show Offers</span>
+              <span></span>
+              <span></span>
+              <span>Show Offers</span>
+            </a>
+            <p style="margin-top: 130px;">Limited Time Offer</p>
             <p>this offer ends in 4/15/2019</p>
           </div>
         </div>
@@ -164,6 +294,11 @@
             <div class="product-img">
               <img class="img-fluid" src="/upload/{{ $four_post->photo }}" alt="" />
             </div>
+            @if($four_post->offer > 0 )
+            <del>{{ $four_post->offer }}</del>
+            @else
+            <del>No Offer</del>
+            @endif
             <h4>{{ $four_post->price }} $</h4>
             <a href="/homepage/{{ $four_post->id }}" class="main_btn">Show Product</a>
             <a href="{{ route('product.addToCart', ['id' => $four_post->id]) }}" class="main_btn">Add To Shopping Cart</a>
@@ -183,6 +318,40 @@
                     <a href="{{ route('product.addToCart', ['id' => $five_post->id]) }}">
                       <i class="ti-shopping-cart"></i>
                     </a>
+                    @guest
+                    <a href="{{ route('login') }}" class="icons">
+                        <i class="ti-heart" aria-hidden="true"></i>
+                    </a>
+                    @else
+                    @php
+                        $like_count = 0;
+
+                        $like_status = "btn-secondry";
+                    @endphp
+
+                    @foreach ($five_post->likes as $like)
+                        @php
+                            if ($like->like == 1) {
+                                $like_count++;
+                            }
+
+
+
+                            if (Auth::check()) {
+
+                                if ($like->like == 1 && $like->user_id == Auth::user()->id) {
+                                    $like_status = "btn-success";
+                                }
+                                
+                            }
+
+                        @endphp
+                    @endforeach
+                    <button type="button" data-productid="{{ $five_post->id }}_l" data-like="{{ $like_status }}"
+                            class="ti-heart like btn {{ $like_status }}" style="">
+                        <i aria-hidden="true"></i>
+                    </button>
+                    @endguest
                   </div>
                 </div>
                 <div class="product-btm">
@@ -194,6 +363,11 @@
                   </a>
                   <div class="mt-3">
                     <span class="mr-4">{{ $five_post->price }} $</span>
+                    @if($five_post->offer > 0 )
+                    <del>{{ $five_post->offer }}</del>
+                    @else
+                    <del>No Offer</del>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -210,6 +384,40 @@
                     <a href="{{ route('product.addToCart', ['id' => $sex_post->id]) }}">
                       <i class="ti-shopping-cart"></i>
                     </a>
+                    @guest
+                    <a href="{{ route('login') }}" class="icons">
+                        <i class="ti-heart" aria-hidden="true"></i>
+                    </a>
+                    @else
+                    @php
+                        $like_count = 0;
+
+                        $like_status = "btn-secondry";
+                    @endphp
+
+                    @foreach ($sex_post->likes as $like)
+                        @php
+                            if ($like->like == 1) {
+                                $like_count++;
+                            }
+
+
+
+                            if (Auth::check()) {
+
+                                if ($like->like == 1 && $like->user_id == Auth::user()->id) {
+                                    $like_status = "btn-success";
+                                }
+                                
+                            }
+
+                        @endphp
+                    @endforeach
+                    <button type="button" data-productid="{{ $sex_post->id }}_l" data-like="{{ $like_status }}"
+                            class="ti-heart like btn {{ $like_status }}" style="">
+                        <i aria-hidden="true"></i>
+                    </button>
+                    @endguest
                   </div>
                 </div>
                 <div class="product-btm">
@@ -221,6 +429,11 @@
                   </a>
                   <div class="mt-3">
                     <span class="mr-4">{{ $sex_post->price }} $</span>
+                    @if($sex_post->offer > 0 )
+                    <del>{{ $sex_post->offer }}</del>
+                    @else
+                    <del>No Offer</del>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -237,6 +450,40 @@
                     <a href="{{ route('product.addToCart', ['id' => $seven_post->id]) }}">
                       <i class="ti-shopping-cart"></i>
                     </a>
+                    @guest
+                    <a href="{{ route('login') }}" class="icons">
+                        <i class="ti-heart" aria-hidden="true"></i>
+                    </a>
+                    @else
+                    @php
+                        $like_count = 0;
+
+                        $like_status = "btn-secondry";
+                    @endphp
+
+                    @foreach ($seven_post->likes as $like)
+                        @php
+                            if ($like->like == 1) {
+                                $like_count++;
+                            }
+
+
+
+                            if (Auth::check()) {
+
+                                if ($like->like == 1 && $like->user_id == Auth::user()->id) {
+                                    $like_status = "btn-success";
+                                }
+                                
+                            }
+
+                        @endphp
+                    @endforeach
+                    <button type="button" data-productid="{{ $seven_post->id }}_l" data-like="{{ $like_status }}"
+                            class="ti-heart like btn {{ $like_status }}" style="">
+                        <i aria-hidden="true"></i>
+                    </button>
+                    @endguest
                   </div>
                 </div>
                 <div class="product-btm">
@@ -248,6 +495,11 @@
                   </a>
                   <div class="mt-3">
                     <span class="mr-4">{{ $seven_post->price }} $</span>
+                    @if($seven_post->offer > 0 )
+                    <del>{{ $seven_post->offer }}</del>
+                    @else
+                    <del>No Offer</del>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -264,6 +516,40 @@
                     <a href="{{ route('product.addToCart', ['id' => $eight_post->id]) }}">
                       <i class="ti-shopping-cart"></i>
                     </a>
+                    @guest
+                    <a href="{{ route('login') }}" class="icons">
+                        <i class="ti-heart" aria-hidden="true"></i>
+                    </a>
+                    @else
+                    @php
+                        $like_count = 0;
+
+                        $like_status = "btn-secondry";
+                    @endphp
+
+                    @foreach ($eight_post->likes as $like)
+                        @php
+                            if ($like->like == 1) {
+                                $like_count++;
+                            }
+
+
+
+                            if (Auth::check()) {
+
+                                if ($like->like == 1 && $like->user_id == Auth::user()->id) {
+                                    $like_status = "btn-success";
+                                }
+                                
+                            }
+
+                        @endphp
+                    @endforeach
+                    <button type="button" data-productid="{{ $eight_post->id }}_l" data-like="{{ $like_status }}"
+                            class="ti-heart like btn {{ $like_status }}" style="">
+                        <i aria-hidden="true"></i>
+                    </button>
+                    @endguest
                   </div>
                 </div>
                 <div class="product-btm">
@@ -275,6 +561,11 @@
                   </a>
                   <div class="mt-3">
                     <span class="mr-4">{{ $eight_post->price }} $</span>
+                    @if($eight_post->offer > 0 )
+                    <del>{{ $eight_post->offer }}</del>
+                    @else
+                    <del>No Offer</del>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -311,6 +602,40 @@
                 <a href="{{ route('product.addToCart', ['id' => $product->id]) }}">
                   <i class="ti-shopping-cart"></i>
                 </a>
+                @guest
+                <a href="{{ route('login') }}" class="icons">
+                    <i class="ti-heart" aria-hidden="true"></i>
+                </a>
+                @else
+                @php
+                    $like_count = 0;
+
+                    $like_status = "btn-secondry";
+                @endphp
+
+                @foreach ($product->likes as $like)
+                    @php
+                        if ($like->like == 1) {
+                            $like_count++;
+                        }
+
+
+
+                        if (Auth::check()) {
+
+                            if ($like->like == 1 && $like->user_id == Auth::user()->id) {
+                                $like_status = "btn-success";
+                            }
+                            
+                        }
+
+                    @endphp
+                @endforeach
+                <button type="button" data-productid="{{ $product->id }}_l" data-like="{{ $like_status }}"
+                        class="ti-heart like btn {{ $like_status }}" style="">
+                    <i aria-hidden="true"></i>
+                </button>
+                @endguest
               </div>
             </div>
             <div class="product-btm">
@@ -354,6 +679,40 @@
                 <a href="{{ route('product.addToCart', ['id' => $product2->id]) }}">
                   <i class="ti-shopping-cart"></i>
                 </a>
+                @guest
+                <a href="{{ route('login') }}" class="icons">
+                    <i class="ti-heart" aria-hidden="true"></i>
+                </a>
+                @else
+                @php
+                    $like_count = 0;
+
+                    $like_status = "btn-secondry";
+                @endphp
+
+                @foreach ($product2->likes as $like)
+                    @php
+                        if ($like->like == 1) {
+                            $like_count++;
+                        }
+
+
+
+                        if (Auth::check()) {
+
+                            if ($like->like == 1 && $like->user_id == Auth::user()->id) {
+                                $like_status = "btn-success";
+                            }
+                            
+                        }
+
+                    @endphp
+                @endforeach
+                <button type="button" data-productid="{{ $product2->id }}_l" data-like="{{ $like_status }}"
+                        class="ti-heart like btn {{ $like_status }}" style="">
+                    <i aria-hidden="true"></i>
+                </button>
+                @endguest
               </div>
             </div>
             <div class="product-btm">
@@ -398,6 +757,40 @@
                 <a href="{{ route('product.addToCart', ['id' => $product3->id]) }}">
                   <i class="ti-shopping-cart"></i>
                 </a>
+                @guest
+                <a href="{{ route('login') }}" class="icons">
+                    <i class="ti-heart" aria-hidden="true"></i>
+                </a>
+                @else
+                @php
+                    $like_count = 0;
+
+                    $like_status = "btn-secondry";
+                @endphp
+
+                @foreach ($product3->likes as $like)
+                    @php
+                        if ($like->like == 1) {
+                            $like_count++;
+                        }
+
+
+
+                        if (Auth::check()) {
+
+                            if ($like->like == 1 && $like->user_id == Auth::user()->id) {
+                                $like_status = "btn-success";
+                            }
+                            
+                        }
+
+                    @endphp
+                @endforeach
+                <button type="button" data-productid="{{ $product3->id }}_l" data-like="{{ $like_status }}"
+                        class="ti-heart like btn {{ $like_status }}" style="">
+                    <i aria-hidden="true"></i>
+                </button>
+                @endguest
               </div>
             </div>
             <div class="product-btm">

@@ -29,6 +29,40 @@
                                     <a href="{{ route('product.addToCart', ['id' => $products->id]) }}">
                                         <i class="ti-shopping-cart"></i>
                                     </a>
+                                    @guest
+                                    <a href="{{ route('login') }}" class="icons">
+                                        <i class="ti-heart" aria-hidden="true"></i>
+                                    </a>
+                                    @else
+                                    @php
+                                        $like_count = 0;
+
+                                        $like_status = "btn-secondry";
+                                    @endphp
+
+                                    @foreach ($products->likes as $like)
+                                        @php
+                                            if ($like->like == 1) {
+                                                $like_count++;
+                                            }
+
+
+
+                                            if (Auth::check()) {
+
+                                                if ($like->like == 1 && $like->user_id == Auth::user()->id) {
+                                                    $like_status = "btn-success";
+                                                }
+                                                
+                                            }
+
+                                        @endphp
+                                    @endforeach
+                                    <button type="button" data-productid="{{ $products->id }}_l" data-like="{{ $like_status }}"
+                                            class="ti-heart like btn {{ $like_status }}" style="">
+                                        <i aria-hidden="true"></i>
+                                    </button>
+                                    @endguest
                                 </div>
                             </div>
                             <div class="product-btm">
@@ -37,34 +71,49 @@
                                 </a>
                                 <div class="mt-3">
                                     <span class="mr-4">{{ $products->price }} $</span>
+                                    @if($products->offer > 0 )
+                                    <del>{{ $products->offer }}</del>
+                                    @else
+                                    <del>No Offer</del>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
             @else
-                <h2>
-                    <a href="#">No Found Product In Category -> !! {{ $category->name }} !!</a>
+                <h2 class="alert alert-danger">
+                    No Found Product In Category -> !! {{ $category->name }} !!
                 </h2>
             @endif
         </div>
         <hr>
         <br>
-        @if($prev)
+        
+        {{-- @if($prev)
             <a href="{{ route('category.show', ['id' => $prev->id]) }}">
-                <button type="button" class="btn btn-warning"><span class="fas fa-chevron-left"></span> Prev
+                <button type="button" class="btn btn-danger"><span class="fa fa-chevron-left"></span> Prev
                     => {{ $prev->name }} </button>
             </a>
         @endif
         <a href="/homepage">
-            <button type="button" class="btn btn-success">Back HomePage</button>
+            <button type="button" class="btn btn-info">Back HomePage</button>
         </a>
 
         @if($next)
             <a href="{{ route('category.show', ['id' => $next->id]) }}">
                 <button type="button" class="btn btn-danger">Next => {{ $next->name }} <span
-                            class="fas fa-chevron-right"></span></button>
+                            class="fa fa-chevron-right"></span></button>
             </a>
+        @endif --}}
+    </div>
+    <div class="buttonstyles">
+        @if($prev)
+            <a class="link1" href="{{ route('category.show', ['id' => $prev->id]) }}">Prev: {{ $prev->name }} </a>
+        @endif
+        <a class="link2" href="/">Home</a>
+        @if($next)
+            <a class="link3" href="{{ route('category.show', ['id' => $next->id]) }}">Next: {{ $next->name }} </a>
         @endif
     </div>
 </section>

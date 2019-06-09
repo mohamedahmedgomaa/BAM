@@ -10,6 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    @yield('styles')
 
     <link rel="stylesheet" href="{{ url('design/style') }}/css/font-awesome.min.css">
     <!-- Styles -->
@@ -23,6 +24,8 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
 </head>
 <body>
 <div id="app">
@@ -63,7 +66,6 @@
                         </li>
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
-                        <li class="float-left"><a href="{{ url('/homepage') }}">Top Product</a></li>
                         <li class="float-left"><a href="{{ url('statistics') }}">Statistics</a></li>
                         <li><a href="{{ url('/') }}">Home</a></li>
                     @else
@@ -79,7 +81,6 @@
                             </a>
                         </li>
                         <li class="float-left"><a href="{{ url('/') }}">Home</a></li>
-                        <li class="float-left"><a href="{{ url('/homepage') }}">Top Product</a></li>
                         <li class="float-left"><a href="{{ url('statistics') }}">Statistics</a></li>
                         {{-- // Category // --}}
                         @if (auth()->user()->hasRole('admin_shop'))
@@ -152,5 +153,6 @@
     var token = "{{ Session::token() }}";
 
 </script>
+@yield('scripts')
 </body>
 </html>

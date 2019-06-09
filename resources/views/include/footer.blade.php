@@ -11,13 +11,23 @@
           </ul>
         </div>
         <div class="col-lg-2 col-md-6 single-footer-widget">
-          <h4>Features</h4>
+          <h4>Pages</h4>
           <ul>
-
-            <li><a href="#">Jobs</a></li>
-            <li><a href="#">Brand Assets</a></li>
-            <li><a href="#">Investor Relations</a></li>
-            <li><a href="#">Terms of Service</a></li>
+              <li>
+                  <a href="{{ route('homepage') }}">Top Products</a>
+              </li>
+              <li>
+                  <a href="{{ route('allusers') }}">All Users</a>
+              </li>
+              <li>
+                  <a href="{{ route('shopshow') }}">All Shops</a>
+              </li>
+              <li>
+                  <a href="{{ route('allProduct') }}">All Products</a>
+              </li>
+              <li>
+                  <a href="{{ route('allOffer') }}">All Offer</a>
+              </li>
           </ul>
         </div>
         {{-- @if(Auth::check()) --}}
@@ -26,8 +36,8 @@
           <ul>
             @foreach($categories as $category)
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{ route('category.show', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                  <li>
+                    <a href="{{ route('category.show', ['id' => $category->id]) }}">{{ $category->name }}</a>
                   </li>
 
             @endforeach
@@ -53,20 +63,20 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="../js/jquery-3.2.1.min.js"></script>
-  <script src="../js/popper.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../js/stellar.js"></script>
-  <script src="../vendors/lightbox/simpleLightbox.min.js"></script>
-  <script src="../vendors/nice-select/js/jquery.nice-select.min.js"></script>
-  <script src="../vendors/isotope/imagesloaded.pkgd.min.js"></script>
-  <script src="../vendors/isotope/isotope-min.js"></script>
-  <script src="../vendors/owl-carousel/owl.carousel.min.js"></script>
-  <script src="../js/jquery.ajaxchimp.min.js"></script>
-  <script src="../vendors/counter-up/jquery.waypoints.min.js"></script>
-  <script src="../vendors/counter-up/jquery.counterup.js"></script>
-  <script src="../js/mail-script.js"></script>
-  <script src="../js/theme.js"></script>
+  <script src="/js/jquery-3.2.1.min.js"></script>
+  <script src="/js/popper.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/stellar.js"></script>
+  <script src="/vendors/lightbox/simpleLightbox.min.js"></script>
+  <script src="/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+  <script src="/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+  <script src="/vendors/isotope/isotope-min.js"></script>
+  <script src="/vendors/owl-carousel/owl.carousel.min.js"></script>
+  <script src="/js/jquery.ajaxchimp.min.js"></script>
+  <script src="/vendors/counter-up/jquery.waypoints.min.js"></script>
+  <script src="/vendors/counter-up/jquery.counterup.js"></script>
+  <script src="/js/mail-script.js"></script>
+  <script src="/js/theme.js"></script>
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="{{ asset('js/likes.js') }}"></script>
@@ -76,5 +86,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       var token = "{{ Session::token() }}";
 
   </script>
+
+  @yield('scripts')
   </body>
 </html>

@@ -4,11 +4,10 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard - 
-                    	<a class="btn btn-danger" href="/homepage">back</a>
-                    </div>
+                    <div class="panel-heading">Create Product</div>
 
                     <div class="panel-body">
+
 
 						@if (session('status'))
 						    <div class="alert alert-success">
@@ -47,13 +46,17 @@
 						                   placeholder="Tilte Post">
 						        </div>
 						        <div class="form-group">
-						            <label for="content">Content</label>
-						            <textarea name="content" required="required" id="content" class="form-control"
-						                      placeholder="Content Post"></textarea>
-						        </div>
+		                            <label for="content">Description</label>
+		                            <textarea class="form-control" name="content" id="content" rows="8" cols="8"></textarea>
+		                          </div>
 						        <div class="form-group">
 						            <label for="price">Price</label>
 						            <input type="text" name="price" required="required" class="form-control" id="price"
+						                   placeholder="Input Price by $">
+						        </div>
+						        <div class="form-group">
+						            <label for="offer">Offer</label>
+						            <input type="text" name="offer" class="form-control" id="offer"
 						                   placeholder="Input Price by $">
 						        </div>
 						        <div class="form-group">
@@ -72,4 +75,25 @@
             </div>
         </div>
     </div>
+
+{{-- @section('styles')
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+
 @endsection
+
+
+@section('scripts')
+ 
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js" defer></script>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script>
+    $(document).ready(function() {
+      $('#content').summernote();
+    });
+</script>
+
+@endsection --}}
+
+@endsection
+

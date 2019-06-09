@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Edit Page</div>    
                 <div class="panel-body">
-                    <form action="/profile/update/{{ $users->id }}" method="POST">
+                    <form action="{{ route('profile.update',['id'=>$users->id]) }}" method="POST">
                         {{ csrf_field() }}
                     <br>
                       <div class="form-group">

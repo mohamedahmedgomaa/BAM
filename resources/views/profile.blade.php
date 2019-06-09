@@ -23,7 +23,7 @@
                     <a href="/profile/edit/{{ $user->id }}" class="btn btn-info">
                         <i class="fa fa-edit"> Edit User {{ $user->name }}</i>
                     </a>
-                    @foreach($orders as $order)
+                    {{-- @foreach($orders as $order)
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <ul class="list-group">
@@ -39,9 +39,11 @@
                                 <strong>Total Price: {{ $order->cart->totalPrice }} $</strong>
                             </div>
                         </div>
-                    @endforeach
+                    @endforeach --}}
                 @endif
-
+                <a href="{{ route('profile.send.message',['id'=>$user->id]) }}" class="btn btn-info">
+                    <i class="fa fa-edit"> Send Message {{ $user->name }}</i>
+                </a>
 
         </div>
         <div>

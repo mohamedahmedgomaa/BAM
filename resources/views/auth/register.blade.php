@@ -92,7 +92,11 @@
 
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary">
+                        {{-- <button type="submit" class="btn btn-primary">
+                            Register
+                        </button> --}}
+
+                        <button type="submit" class="buttonstyle" style="margin-top: 50px;margin-left: 80px;">
                             Register
                         </button>
                     </div>

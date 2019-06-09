@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Departments;
 use App\Like;
+use App\Message;
 use App\Model\Product;
 use App\User;
 use Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Image;
 
@@ -25,6 +27,56 @@ class UserController extends Controller
             ->with('product', $user->product)
             ->with('orders', $orders);
     }
+
+
+    public function getAllConnections()
+    {
+        $id = auth()->id();
+        $toUsers = Message::distinct()->where('from', $id)->get(['to'])->pluck('to')->toArray();
+        $fromUsers = Message::distinct()->where('to', $id)->get(['from'])->pluck('from')->toArray();
+        $users = User::with(['messageFrom', 'messageTo'])->whereIn('id', array_merge($toUsers, $fromUsers))->get();
+        return view('profile.connection_all')->with('users', $users);
+    }
+
+    public function getMessagesByUser($id)
+    {
+        $currentId = auth()->id();
+        $user = User::findOrFail($id);
+        $toUsers = Message::distinct()->where('from', $currentId)->get(['to'])->pluck('to')->toArray();
+        $fromUsers = Message::distinct()->where('to', $currentId)->get(['from'])->pluck('from')->toArray();
+        $users = User::with(['messageFrom', 'messageTo'])->whereIn('id', array_merge($toUsers, $fromUsers))->get();
+        $currentConnection = [auth()->id(), $id];
+        $messages = Message::where(function (Builder $query) use ($id) {
+            $query->where('from', auth()->id());
+            $query->where('to', $id);
+        })->orWhere(function (Builder $query) use ($id) {
+            $query->where('to', auth()->id());
+            $query->where('from', $id);
+        })->get();
+        return view('messages.message', compact(['messages', 'users', 'user']));
+    }
+
+    public function send($id)
+    {
+        $user = User::findOrFail($id);
+        return view('messages.send', compact(['user']));
+    }
+
+    public function receive(Request $request, $id)
+    {
+        //
+        $validated = $this->validate($request, [
+            'text' => 'required',
+        ]);
+        // $message = Message::where('from', $id)->orWhere('to', $id);
+        $message = Message::create([
+            'from' => auth()->id(),
+            'to' => $id,
+            'text' => $validated['text']
+        ]);
+        return redirect()->route('profile.connection.get', ['id' => $id]);
+    }
+
 
     public function update_avatar(Request $request)
     {
@@ -76,7 +128,7 @@ class UserController extends Controller
 
             $user->save();
 
-            return redirect('/profile/{{ $user->id }}');
+            return redirect()->route('profile', ['id' => auth()->id()]);
         }
         abort('404');
     }

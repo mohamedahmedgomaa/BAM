@@ -8,16 +8,6 @@ use Storage;
 
 class Upload extends Controller
 {
-    /*
-		'name',
-		'size',
-		'file',
-		'path',
-		'full_file',
-		'mime_type',
-		'file_type',
-		'relation_id',
-    */ 
 
 	public function delete($id) {
 		$file = File::find($id);

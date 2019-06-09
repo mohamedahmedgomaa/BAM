@@ -37,7 +37,7 @@
         <br>
     @else
         <h2 class="alert">
-            <a class="alert alert-danger" style="color: #000" href="{{url('index')}}">No Item In Cart !!</a>
+            <a class="alert alert-danger" style="color: #000" href="{{url('')}}">No Item In Cart !!</a>
         </h2>
     @endif
 </div>

@@ -6,7 +6,7 @@
       <div class="container">
         <div class="banner_content row">
           <div class="col-lg-8">
-            <form style="color: #fff;" class="form-horizontal" method="POST" action="{{ route('checkout') }}">
+            <form style="color: #fff;" class="form-horizontal" method="POST" action="{{ route('postcheckout') }}">
                 {{ csrf_field() }}
 
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -14,7 +14,7 @@
 
                     <div class="col-md-6">
                         
-                        <input type="text" class="form-control" name="name" id="name" required="required" placeholder="Name">
+                        <input type="text" class="form-control" name="name" id="name"  required="required" placeholder="Name">
 
                         @if ($errors->has('name'))
                             <span class="help-block">
@@ -38,8 +38,31 @@
                     </div>
                 </div>
 
+                <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                    <label for="address" class="col-md-4 control-label">Total Price</label>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="total" value="{{ $total }}" id="total" required="required" placeholder="Total Price">
+
+                        
+                    </div>
+                </div>
+
+
+                <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                    <label for="address" class="col-md-4 control-label">Total Price</label>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="totalQty" value="{{ $totalQty }}" id="totalQty" required="required" placeholder="Total Price">
+
+                       
+                    </div>
+                </div>
+
+
+
                
-                <div class="form-group{{ $errors->has('card-name') ? ' has-error' : '' }}">
+              {{--   <div class="form-group{{ $errors->has('card-name') ? ' has-error' : '' }}">
                     <label for="card-name" class="col-md-4 control-label">Card Holder Name</label>
 
                     <div class="col-md-6">
@@ -107,7 +130,7 @@
                             </span>
                         @endif
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">

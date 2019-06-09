@@ -24,6 +24,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function(){
 			Route::resource('products', 'ProductsController');
 			Route::delete('products/destroy/all', 'ProductsController@multi_delete');
 
+			Route::resource('messages', 'MessagesController');
+			Route::delete('messages/destroy/all', 'MessagesController@multi_delete');
+
 			Route::get('/', 'StatisticsController@statistics');
 			
 			Route::get('/adminss', [

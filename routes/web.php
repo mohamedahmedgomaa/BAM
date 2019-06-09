@@ -10,36 +10,48 @@ Auth::routes();
 
 // Route::get('/', 'HomeController@index')->name('home');
 
+
 Route::group(['middleware' => 'user:web'], function () {
+    Route::get('/profile/Connections', 'UserController@getAllConnections')->name('profile.connections');
+    Route::get('/profile/Connections/{id}', 'UserController@getMessagesByUser')->name('profile.connection.get');
+    Route::post('/profile/receive/{id}', 'UserController@receive')->name('profile.receive');
+    Route::get('/profile/send/{id}', 'UserController@send')->name('profile.send.message');
+
 
     Route::get('/profile/{id}', 'UserController@profile')->name('profile');
     Route::post('/profile/{id}', 'UserController@update_avatar')->name('update_avatar');
-    Route::get('/profile/edit/{id}', 'UserController@edit');
-    Route::post('/profile/update/{id}', 'UserController@update');
+    Route::get('/profile/edit/{id}', 'UserController@edit')->name('profile.edit');
+    Route::post('/profile/update/{id}', 'UserController@update')->name('profile.update');
+
+
+
 
     Route::get('/logout', 'HomeController@destroy');
 
 
 
     ////////// Like & Dislike //////////////////
-
     Route::post('/like', 'PostController@like')->name('like');
     Route::post('/dislike', 'PostController@dislike')->name('dislike');
-
     ////////// Like& Dislike //////////////////
 
-    Route::get('/checkout', 'PostController@getCheckout')->name('checkout');
-    Route::post('/checkout', 'PostController@postCheckout')->name('checkout');
 
-    //////////////////// Roles Admin Shop ////////////////////////
+    // Route::get('/checkout', 'PostController@getCheckout')->name('checkout');
+    // Route::post('/checkout', 'PostController@postCheckout')->name('checkout');
+
+    Route::get('/checkout', 'siteUIcontroller@getCheckout')->name('checkout');
+    Route::post('/checkout', 'siteUIcontroller@postCheckout')->name('postcheckout');
+
+
 
     Route::post('/homepage/{product}/store', 'CommentController@store');
     Route::get('/homepage', 'PostController@products')->name('homepage');
     
+    //////////////////// Roles Admin Shop ////////////////////////
     Route::group(['middleware' => 'roles', 'roles' => ['admin_shop']], function () {
 
         ////////// Create Product ////////////////////
-        Route::get('/createProduct', 'PostController@createProduct')->name('homepage.createProduct');
+        Route::get('/createProduct', 'PostController@createProduct')->name('createProduct');
         Route::post('/homepage/store', 'PostController@store');
         ////////// Create Product ////////////////////
         
@@ -90,6 +102,7 @@ Route::get('/shopping-cart', 'PostController@getCart')->name('product.shoppingCa
 
 Route::get('/likedProduct', 'UserController@likedProduct')->name('product.likedProduct');
 
+Route::get('/allOffer', 'siteUIcontroller@alloffer')->name('allOffer');
 
 Route::get('/reduce/{id}', 'PostController@getReduceByOne')->name('product.reduceByOne');
 Route::get('/remove/{id}', 'PostController@getRemoveItem')->name('product.remove');
@@ -114,8 +127,14 @@ Route::get('/results', function () {
 Route::get('/shopshow', 'siteUIcontroller@shopshow')->name('shopshow');
 //////////////  admin shop show ///////////////
 
-Route::get('/allProduct', 'siteUIcontroller@allProduct')->name('allProduct');
+//////////////  allUsers show ///////////////
+Route::get('/allusers', 'siteUIcontroller@allusers')->name('allusers');
+//////////////  allUsers show ///////////////
 
+Route::get('/allProduct', 'siteUIcontroller@allProduct')->name('allProduct');
+Route::get('/pagenotfound', 'HomeController@pagenotfound')->name('notfounds');
+
+// Route::get('/receives', 'UserController@receives')->name('receives');
 
 
 

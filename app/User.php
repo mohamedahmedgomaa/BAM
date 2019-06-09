@@ -50,7 +50,12 @@ class User extends Authenticatable
     public function product() {
         return $this->hasMany('App\Model\Product', 'user_id', 'id');
     }
-
+    public function messageFrom() {
+        return $this->hasMany('App\Message','to');
+    }
+    public function messageTo() {
+        return $this->hasMany('App\Message','from');
+    }
     public function roles() {
         return $this->belongsToMany('App\Role', 'user_roles', 'user_id', 'role_id');
     }

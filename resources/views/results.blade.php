@@ -23,6 +23,40 @@
                         <a href="{{ route('product.addToCart', ['id' => $product->id]) }}">
                           <i class="ti-shopping-cart"></i>
                         </a>
+                        @guest
+                        <a href="{{ route('login') }}" class="icons">
+                            <i class="ti-heart" aria-hidden="true"></i>
+                        </a>
+                        @else
+                        @php
+                            $like_count = 0;
+
+                            $like_status = "btn-secondry";
+                        @endphp
+
+                        @foreach ($product->likes as $like)
+                            @php
+                                if ($like->like == 1) {
+                                    $like_count++;
+                                }
+
+
+
+                                if (Auth::check()) {
+
+                                    if ($like->like == 1 && $like->user_id == Auth::user()->id) {
+                                        $like_status = "btn-success";
+                                    }
+                                    
+                                }
+
+                            @endphp
+                        @endforeach
+                        <button type="button" data-productid="{{ $product->id }}_l" data-like="{{ $like_status }}"
+                                class="ti-heart like btn {{ $like_status }}" style="">
+                            <i aria-hidden="true"></i>
+                        </button>
+                        @endguest
                       </div>
                     </div>
                     <div class="product-btm">

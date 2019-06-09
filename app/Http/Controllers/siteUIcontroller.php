@@ -6,6 +6,11 @@ use App\Departments;
 use App\User;
 use App\Model\Product;
 use App\Model\Setting;
+use App\Role;
+use Session;
+use App\Cart;
+use Illuminate\Http\Request;
+use App\Order;
 
 class siteUIcontroller extends Controller
 {
@@ -47,7 +52,14 @@ class siteUIcontroller extends Controller
     }
 
     public function shopshow() {
-        $shopshow = User::all();
+        $shopshow = Role::find(2)->users;
+        return view('adminshop_show', compact('shopshow'))
+        ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
+        ->with('categories', Departments::all()->take(5));
+    }
+
+    public function allusers() {
+        $shopshow = Role::find(1)->users;
         return view('adminshop_show', compact('shopshow'))
         ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
         ->with('categories', Departments::all()->take(5));
@@ -59,5 +71,92 @@ class siteUIcontroller extends Controller
         ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
         ->with('categories', Departments::all()->take(5));
     }
+
+    public function alloffer() {
+        $alloffer = Product::where('offer','>' , 0)->get();
+        
+        return view('alloffer', compact('alloffer'))
+        ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
+        ->with('categories', Departments::all()->take(5));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public function getCheckout()
+    {
+        if (!Session::has('cart')) {
+            return view('shop.shopping-cart')->with('categories', Departments::all()->take(5))
+                ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
+        }
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $total = $cart->totalPrice;
+        $item = $cart->items;
+        $totalQty = $cart->totalQty;
+        // dd($totalQty);
+        return view('shop.checkout', ['total' => $total])->with('categories', Departments::all()->take(5))
+            ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
+
+                                ->with('total', $total)
+                                ->with('totalQty', $totalQty);
+    }
+
+    public function postCheckout(Request $request)
+    {
+        if (!Session::has('cart')) {
+            return redirect()->route('shop.shoppingCart')->with('categories', Departments::all()->take(5))
+                ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')            ->orderBy('comments_count', 'desc')->limit(5)->get())
+                                
+                                ->with('totalQty', $totalQty);
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        
+            $order = new Order();
+
+            $this->validate(request(), [
+                'address' => 'required',
+                'name' => 'required',
+                'total' => 'nullable|numeric',
+                'user_id' => 'nullable|numeric',
+                'totalQty'   => 'nullable|numeric',
+            ]);
+
+
+            $order->address = request('address');
+            $order->name = request('name');
+            $order->user_id = auth()->id();
+            $order->total = $cart->totalPrice;
+            $order->totalQty = $cart->totalQty;
+
+            $order->save();
+
+        Session::forget('cart');
+
+        return redirect()->route('index')->with('success', 'Successfully purchased Products !')
+                                            ->with('categories', Departments::all()->take(5))
+                                            ;
+    }
+
+
 
 }

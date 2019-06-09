@@ -4,8 +4,10 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard - 
-                        <a class="btn btn-success" href="createProduct">Create Product</a>
+                    <div class="panel-heading">Dashboard
+                    @if (auth()->user()->hasRole('admin_shop'))
+                        - <a class="btn btn-success" href="createProduct">Create Product</a>
+                    @endif
                     </div>
 
                     <div class="panel-body">
@@ -37,10 +39,8 @@
 
                             @php
                                 $like_count = 0;
-                                $dislike_count = 0;
 
                                 $like_status = "btn-secondry";
-                                $dislike_status = "btn-secondry";
                             @endphp
 
                             @foreach ($product->likes as $like)

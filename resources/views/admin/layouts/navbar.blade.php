@@ -108,6 +108,18 @@
           </ul>
         </li>
 
+        <li class="treeview {{ active_menu('messages')[0] }}">
+          <a href="#">
+            <i class="fa fa-send"></i> <span>{{ trans('admin.messages') }}</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+          <ul class="treeview-menu" style="{{ active_menu('messages')[1] }}">
+            <li class=""><a href="{{ aurl('messages') }}"><i class="fa fa-send"></i>{{ trans('admin.messages') }}</a></li>
+            <li class=""><a href="{{ aurl('messages/create') }}"><i class="fa fa-plus"></i>{{ trans('admin.add') }}</a></li>
+          </ul>
+        </li>
+
 
 {{--         <li class="treeview {{ active_menu('likes')[0] }}">
           <a href="#">
