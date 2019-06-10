@@ -120,7 +120,7 @@
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-btn fa-sign-out"></i> Logout
+                                        <i class="fa fa-btn fa-sign"></i> Logout
                                     </a>
 
 

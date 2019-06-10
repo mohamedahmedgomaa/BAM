@@ -27,6 +27,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function(){
 			Route::resource('messages', 'MessagesController');
 			Route::delete('messages/destroy/all', 'MessagesController@multi_delete');
 
+			Route::resource('likes', 'LikesController');
+			Route::delete('likes/destroy/all', 'LikesController@multi_delete');
+
 			Route::get('/', 'StatisticsController@statistics');
 			
 			Route::get('/adminss', [

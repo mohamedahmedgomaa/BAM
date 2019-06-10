@@ -79,13 +79,13 @@ Route::group(['middleware' => 'Maintenance'], function () {
     });
 });
 
-Route::get('maintenance', function () {
+// Route::get('maintenance', function () {
 
-    if (setting()->status == 'open') {
-        return redirect('/');
-    }
-    return view('style.maintenance');
-});
+//     if (setting()->status == 'open') {
+//         return redirect('/');
+//     }
+//     return view('style.maintenance');
+// });
 
 
 Route::get('/statistics', 'PostController@statistics');
@@ -132,7 +132,7 @@ Route::get('/allusers', 'siteUIcontroller@allusers')->name('allusers');
 //////////////  allUsers show ///////////////
 
 Route::get('/allProduct', 'siteUIcontroller@allProduct')->name('allProduct');
-Route::get('/pagenotfound', 'HomeController@pagenotfound')->name('notfounds');
+//Route::get('/pagenotfound', 'HomeController@pagenotfound')->name('notfounds');
 
 // Route::get('/receives', 'UserController@receives')->name('receives');
 

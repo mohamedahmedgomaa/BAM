@@ -168,6 +168,9 @@
                                         <li class="nav-item">
                                             <a href="{{ route('allOffer') }}" class="nav-link">All Offer</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('profile.connection.get', ['id'=>auth()->id()]) }}" class="nav-link">Connection</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">

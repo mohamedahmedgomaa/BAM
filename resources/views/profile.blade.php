@@ -41,9 +41,11 @@
                         </div>
                     @endforeach --}}
                 @endif
+                @if(auth()->id() != $user->id)
                 <a href="{{ route('profile.send.message',['id'=>$user->id]) }}" class="btn btn-info">
                     <i class="fa fa-edit"> Send Message {{ $user->name }}</i>
                 </a>
+                @endif
 
         </div>
         <div>

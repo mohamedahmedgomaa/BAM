@@ -26,16 +26,16 @@ class siteUIcontroller extends Controller
             ->with('sex_post', Product::orderBy('created_at', 'desc')->skip(5)->take(1)->get()->first())
             ->with('seven_post', Product::orderBy('created_at', 'desc')->skip(6)->take(1)->get()->first())
             ->with('eight_post', Product::orderBy('created_at', 'desc')->skip(7)->take(1)->get()->first())
-            ->with('category1', Departments::find(1))
-            ->with('category2', Departments::find(2))
-            ->with('category3', Departments::find(3))
+            ->with('category1', Departments::findOrFail(1))
+            ->with('category2', Departments::findOrFail(2))
+            ->with('category3', Departments::findOrFail(3))
             ->with('settings', Setting::all())
             ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
     }
 
     public function showCategory($id)
     {
-        $category = Departments::find($id);
+        $category = Departments::findOrFail($id);
         $next_page = Departments::where('id', '>', $category->id)->min('id');
         $prev_page = Departments::where('id', '<', $category->id)->max('id');
         return view('categories.category')->with('category', $category)
@@ -52,7 +52,9 @@ class siteUIcontroller extends Controller
     }
 
     public function shopshow() {
-        $shopshow = Role::find(2)->users;
+//        $shopshow = Role::find(2)->users;
+        $shopshow = Role::where('name', 'admin_shop')->firstOrFail()->users;
+
         return view('adminshop_show', compact('shopshow'))
         ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
         ->with('categories', Departments::all()->take(5));

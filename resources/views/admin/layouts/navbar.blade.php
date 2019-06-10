@@ -120,6 +120,18 @@
           </ul>
         </li>
 
+        <li class="treeview {{ active_menu('likes')[0] }}">
+          <a href="#">
+            <i class="fa fa-thumbs-up"></i> <span>{{ trans('admin.likes') }}</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+          <ul class="treeview-menu" style="{{ active_menu('likes')[1] }}">
+            <li class=""><a href="{{ aurl('likes') }}"><i class="fa fa-thumbs-up"></i>{{ trans('admin.likes') }}</a></li>
+            
+          </ul>
+        </li>
+
 
 {{--         <li class="treeview {{ active_menu('likes')[0] }}">
           <a href="#">
