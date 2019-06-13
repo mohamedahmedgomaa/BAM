@@ -20,9 +20,6 @@ class Products extends Migration
             $table->longtext('content')->nullable();
             $table->decimal('price', 5, 2)->default(0);
             $table->decimal('offer', 5, 2)->default(0);
-            $table->string('color')->nullable();
-            $table->string('size')->nullable();
-            $table->string('weight')->nullable();
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('category_id')->unsigned()->nullable();

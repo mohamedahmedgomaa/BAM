@@ -25,7 +25,9 @@ class UserController extends Controller
         });
         return view('profile', compact('user'))
             ->with('product', $user->product)
-            ->with('orders', $orders);
+            ->with('orders', $orders)
+            ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
+            ->with('categories', Departments::all()->take(5));
     }
 
 
@@ -35,7 +37,9 @@ class UserController extends Controller
         $toUsers = Message::distinct()->where('from', $id)->get(['to'])->pluck('to')->toArray();
         $fromUsers = Message::distinct()->where('to', $id)->get(['from'])->pluck('from')->toArray();
         $users = User::with(['messageFrom', 'messageTo'])->whereIn('id', array_merge($toUsers, $fromUsers))->get();
-        return view('profile.connection_all')->with('users', $users);
+        return view('profile.connection_all')->with('users', $users)
+            ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
+            ->with('categories', Departments::all()->take(5));
     }
 
     public function getMessagesByUser($id)
@@ -53,13 +57,17 @@ class UserController extends Controller
             $query->where('to', auth()->id());
             $query->where('from', $id);
         })->get();
-        return view('messages.message', compact(['messages', 'users', 'user']));
+        return view('messages.message', compact(['messages', 'users', 'user']))
+            ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
+            ->with('categories', Departments::all()->take(5));
     }
 
     public function send($id)
     {
         $user = User::findOrFail($id);
-        return view('messages.send', compact(['user']));
+        return view('messages.send', compact(['user']))
+            ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
+            ->with('categories', Departments::all()->take(5));
     }
 
     public function receive(Request $request, $id)
@@ -74,7 +82,9 @@ class UserController extends Controller
             'to' => $id,
             'text' => $validated['text']
         ]);
-        return redirect()->route('profile.connection.get', ['id' => $id]);
+        return redirect()->route('profile.connection.get', ['id' => $id])
+            ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
+            ->with('categories', Departments::all()->take(5));
     }
 
 
@@ -93,6 +103,9 @@ class UserController extends Controller
 
             return redirect('/profile/' . auth()->id());
 
+        } else {
+            
+            return redirect('/profile/' . auth()->id());
         }
     }
 

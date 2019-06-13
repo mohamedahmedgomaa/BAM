@@ -60,9 +60,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </div>
   </footer>
   <!--================ End footer Area  =================-->
+ {{--  <!-- Bootstrap core JavaScript -->
+  <script src="{{ asset('') }}vendor/jquery/jquery.min.js"></script>
+  <script src="{{ asset('') }}vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <!-- Plugin JavaScript -->
+  <script src="{{ asset('') }}vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Contact Form JavaScript -->
+  <script src="{{ asset('') }}js/jqBootstrapValidation.js"></script>
+  <script src="{{ asset('') }}js/contact_me.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/freelancer.min.js"></script> --}}
   <script src="/js/jquery-3.2.1.min.js"></script>
   <script src="/js/popper.js"></script>
   <script src="/js/bootstrap.min.js"></script>
@@ -86,7 +96,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       var token = "{{ Session::token() }}";
 
   </script>
-
   @yield('scripts')
   </body>
 </html>

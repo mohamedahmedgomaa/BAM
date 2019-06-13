@@ -14,7 +14,7 @@
 
                     <div class="col-md-6">
                         
-                        <input type="text" class="form-control" name="name" id="name"  required="required" placeholder="Name">
+                        <input type="text" class="form-control" name="name" id="name" value="{{ auth()->user()->name }}" required="required" placeholder="Name">
 
                         @if ($errors->has('name'))
                             <span class="help-block">
@@ -28,7 +28,7 @@
                     <label for="address" class="col-md-4 control-label">Address</label>
 
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="address" id="address" required="required" placeholder="Address">
+                        <input type="text" class="form-control" name="address" value="{{ auth()->user()->address }}" id="address" required="required" placeholder="Address">
 
                         @if ($errors->has('address'))
                             <span class="help-block">
@@ -42,25 +42,16 @@
                     <label for="address" class="col-md-4 control-label">Total Price</label>
 
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="total" value="{{ $total }}" id="total" required="required" placeholder="Total Price">
-
-                        
+{{--                        <input type="cancel" class="form-control" name="total" value="{{ $total }}" id="total" required="required" placeholder="Total Price">--}}
+                            <div style="border: 3px solid #fff;padding: 5px;background: #fff;color: #000;">{{$total}} $</div>
                     </div>
                 </div>
-
-
                 <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                    <label for="address" class="col-md-4 control-label">Total Price</label>
-
+                    <label for="address" class="col-md-4 control-label">Product Number</label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="totalQty" value="{{ $totalQty }}" id="totalQty" required="required" placeholder="Total Price">
-
-                       
                     </div>
                 </div>
-
-
-
                
               {{--   <div class="form-group{{ $errors->has('card-name') ? ' has-error' : '' }}">
                     <label for="card-name" class="col-md-4 control-label">Card Holder Name</label>
@@ -146,10 +137,6 @@
     </div>
   </section>
   <!--================End Home Banner Area =================-->
-
-
-{{-- /////////////////////////////////////////// --}}
-
 
 <script src="https://js.stripe.com/v3/"></script>
 <script src="{{ URL::to('src/js/checkout.js') }}"></script>

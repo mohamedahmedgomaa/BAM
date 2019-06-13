@@ -22,7 +22,6 @@
                                 @else
                                 @php
                                     $like_count = 0;
-
                                     $like_status = "btn-secondry";
                                 @endphp
 
@@ -31,17 +30,11 @@
                                         if ($like->like == 1) {
                                             $like_count++;
                                         }
-
-
-
                                         if (Auth::check()) {
-
                                             if ($like->like == 1 && $like->user_id == Auth::user()->id) {
                                                 $like_status = "btn-success";
                                             }
-                                            
                                         }
-
                                     @endphp
                                 @endforeach
                                 <button type="button" data-productid="{{ $product->id }}_l" data-like="{{ $like_status }}"

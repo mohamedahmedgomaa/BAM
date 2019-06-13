@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8"/>
@@ -8,6 +7,7 @@
     <link rel="icon" href="img/favicon.png" type="image/png"/>
     <title>BAM</title>
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('css/freelancer.min.css') }}"/>
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <link rel="stylesheet" href="/vendors/linericon/style.css"/>
     <link rel="stylesheet" href="/css/font-awesome.min.css"/>
@@ -24,10 +24,11 @@
     <link rel="stylesheet" href="{{ asset('css/buttonstyle.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/button3D.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/stylebutton.css') }}"/>
-
-    @yield('styles')
+     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        @yield('styles')
 </head>
-
 <body>
 <!--================Header Menu Area =================-->
 <header class="header_area">
@@ -76,12 +77,14 @@
                                        aria-expanded="false" aria-haspopup="true" v-pre
                                        style="position: relative;padding-left: 50px;">
                                         <img src="/uploads/avatars/{{ Auth::user()->avatar }}"
-                                             style="width: 16px;height: 16px; position: absolute;left: 10px;border-radius: 50%;">
+                                             style="width: 16px;height: 16px; position: absolute;left: 10px;border-radius: 50%;"
+                                             alt="avater">
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="{{ url('/homepage') }}"><i class="fa fa-btn fa-home"></i> Top Product</a>
+                                            <a href="{{ url('/homepage') }}"><i class="fa fa-btn fa-home"></i> Top
+                                                Product</a>
                                             <a href="{{ url('profile/'.auth()->id()) }}"><i
                                                         class="fa fa-btn fa-user"></i> Profile</a>
                                             <a href="{{ url('statistics') }}"><i class="fa fa-btn fa-user"></i>
@@ -100,9 +103,6 @@
                                         </li>
                                     </ul>
                                 </li>
-
-
-
                             @endguest
                         </ul>
                     </div>
@@ -114,7 +114,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light w-100">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <a class="navbar-brand logo_h" href="{{url('homepage')}}">
+                <a class="navbar-brand logo_h" href="{{url('')}}">
                     @if(!empty(setting()->logo))
                         <img src="{{ Storage::url(setting()->logo) }}" alt="BAM" width="150" height="125">
                     @endif
@@ -153,9 +153,12 @@
                                         <li class="nav-item">
                                             <a href="{{ url('statistics') }}" class="nav-link">Statistics</a>
                                         </li>
+                                        @guest
+                                        @else
                                         <li class="nav-item">
                                             <a href="{{ route('homepage') }}" class="nav-link">Top Products</a>
                                         </li>
+                                        @endguest
                                         <li class="nav-item">
                                             <a href="{{ route('allusers') }}" class="nav-link">All Users</a>
                                         </li>
@@ -169,7 +172,8 @@
                                             <a href="{{ route('allOffer') }}" class="nav-link">All Offer</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('profile.connection.get', ['id'=>auth()->id()]) }}" class="nav-link">Connection</a>
+                                            <a href="{{ route('profile.connection.get', ['id'=>auth()->id()]) }}"
+                                               class="nav-link">Connection</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -181,12 +185,6 @@
 
                         <div class="col-lg-6 pr-0">
                             <ul class="nav navbar-nav navbar-right right_nav pull-right">
-                                {{--   <li class="nav-item">
-                                    <a href="#" class="icons">
-                                      <i class="ti-search" aria-hidden="true"></i>
-                                    </a>
-                                  </li> --}}
-                                {{-- <button class="" type="submit"></button>  --}}
                                 <style type="text/css">
                                     .has-search .form-control {
                                         padding-left: 2.375rem;
@@ -220,14 +218,6 @@
                                         <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
                                     </a>
                                 </li>
-                                {{--                                @else--}}
-                                {{--                                    <li class="nav-item">--}}
-                                {{--                                        <a href="#" class="icons">--}}
-                                {{--                                            <i class="ti-shopping-cart"></i>--}}
-                                {{--                                            <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>--}}
-                                {{--                                        </a>--}}
-                                {{--                                    </li>--}}
-                                {{--                                @endif--}}
                                 @guest
                                     <li class="nav-item">
                                         <a href="{{ url('login')}}" class="icons">
@@ -253,7 +243,6 @@
                                         <i class="ti-heart" aria-hidden="true"></i>
                                     </a>
                                 </li>
-                                
 
 
                             </ul>

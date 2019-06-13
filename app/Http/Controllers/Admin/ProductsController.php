@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\DataTables\ProductsDatatable;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Model\Product;
+use Illuminate\Http\Request;
 use Storage;
 
 class ProductsController extends Controller
@@ -18,7 +18,7 @@ class ProductsController extends Controller
     public function index(ProductsDatatable $trade)
     {
         //
-        return $trade->render('admin.products.index', ['title'=> trans('admin.products')]);
+        return $trade->render('admin.products.index', ['title' => trans('admin.products')]);
     }
 
     /**
@@ -29,45 +29,39 @@ class ProductsController extends Controller
     public function create()
     {
         //
-        return view('admin.products.create', ['title'=> trans('admin.add')]);
+        return view('admin.products.create', ['title' => trans('admin.add')]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store()
     {
         //
-        $data = $this->validate(request(), 
+        $data = $this->validate(request(),
             [
-                'title'               => 'required',
-                'photo'               => 'required|'.v_image(),
-                'content'             => 'required',
-                'price'               => 'required|numeric',
-                'color'               => 'required',
-                'size'                => 'required',
-                'weight'              => 'required',
-                'user_id'             => 'nullable|numeric',
-            ],[],[
-                'title'               => trans('admin.title'),
-                'photo'               => trans('admin.photo'), 
-                'content'             => trans('admin.content'), 
-                'price'               => trans('admin.price'), 
-                'color'               => trans('admin.color'), 
-                'size'                => trans('admin.size'), 
-                'weight'              => trans('admin.weight'), 
-                'user_id'             => trans('admin.user_id'), 
+                'title' => 'required',
+                'photo' => 'required|' . v_image(),
+                'content' => 'required',
+                'price' => 'required|numeric',
+                'user_id' => 'nullable|numeric',
+            ], [], [
+                'title' => trans('admin.title'),
+                'photo' => trans('admin.photo'),
+                'content' => trans('admin.content'),
+                'price' => trans('admin.price'),
+                'user_id' => trans('admin.user_id'),
             ]);
         if (request()->hasFile('photo')) {
             $data['photo'] = up()->upload([
-                'file'              => 'photo',
-                'path'              => 'products',
-                'upload_type'       => 'single',
-                'delete_file'       => '',
-            ]);         
+                'file' => 'photo',
+                'path' => 'products',
+                'upload_type' => 'single',
+                'delete_file' => '',
+            ]);
         }
         Product::create($data);
         session()->flash('success', trans('admin.record_added'));
@@ -77,7 +71,7 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -88,7 +82,7 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -101,40 +95,34 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //
-        $data = $this->validate(request(), 
+        $data = $this->validate(request(),
             [
-                'title'               => 'required',
-                'photo'               => 'required|'.v_image(),
-                'content'             => 'required',
-                'price'               => 'required|numeric',
-                'color'               => 'required',
-                'size'                => 'required',
-                'weight'              => 'required',
-                'user_id'             => 'nullable|numeric',
-            ],[],[
-                'title'               => trans('admin.title'),
-                'photo'               => trans('admin.photo'), 
-                'content'             => trans('admin.content'), 
-                'price'               => trans('admin.price'), 
-                'color'               => trans('admin.color'), 
-                'size'                => trans('admin.size'), 
-                'weight'              => trans('admin.weight'), 
-                'user_id'             => trans('admin.user_id'), 
+                'title' => 'required',
+                'photo' => 'required|' . v_image(),
+                'content' => 'required',
+                'price' => 'required|numeric',
+                'user_id' => 'nullable|numeric',
+            ], [], [
+                'title' => trans('admin.title'),
+                'photo' => trans('admin.photo'),
+                'content' => trans('admin.content'),
+                'price' => trans('admin.price'),
+                'user_id' => trans('admin.user_id'),
             ]);
         if (request()->hasFile('photo')) {
             $data['photo'] = up()->upload([
-                'file'              => 'photo',
-                'path'              => 'products',
-                'upload_type'       => 'single',
-                'delete_file'       => '',
-            ]);         
+                'file' => 'photo',
+                'path' => 'products',
+                'upload_type' => 'single',
+                'delete_file' => '',
+            ]);
         }
         Product::where('id', $id)->update($data);
         session()->flash('success', trans('admin.updated_record'));
@@ -144,7 +132,7 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

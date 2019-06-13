@@ -49,7 +49,6 @@
             display: inline-block;
             text-align: right;
             width: 60%;
-            padding:
         }
 
         .headind_srch {
@@ -231,22 +230,10 @@
 </head>
 <body>
 <div class="container">
-    <h3 class=" text-center">Messaging</h3>
+    <h3 class=" text-center">Messages -<a href="/">Back Home</a></h3>
     <div class="messaging">
         <div class="inbox_msg">
             <div class="inbox_people">
-                <div class="headind_srch">
-                    <div class="recent_heading">
-                        <h4>Recent</h4>
-                    </div>
-                    <div class="srch_bar">
-                        <div class="stylish-input-group">
-                            <input type="text" class="search-bar" placeholder="Search">
-                            <span class="input-group-addon">
-                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-                </span></div>
-                    </div>
-                </div>
                 <div class="inbox_chat">
                     {{-- active_chat --}}
                     @forelse($users as $_user)
@@ -310,6 +297,6 @@
                 </form>
 
             </div>
-        </div>
+        </div></div></div>
 </body>
 </html>

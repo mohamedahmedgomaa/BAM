@@ -43,7 +43,9 @@ class PostController extends Controller
     }
     
     public function createProduct() {
-        return view('createProduct')->with('departments', Departments::all());;
+        return view('createProduct')->with('departments', Departments::all())
+            ->with('categories', Departments::all()->take(5))
+            ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
     }
 
     public function store(Request $request)
@@ -266,23 +268,18 @@ class PostController extends Controller
 
         return redirect()->route('product.shoppingCart')->with('categories', Departments::all()->take(5));
     }
-
     public function getRemoveItem($id)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->removeItem($id);
-
         if (count($cart->items) > 0) {
             Session::put('cart', $cart);
         } else {
             Session::forget('cart');
         }
-
         return redirect()->route('product.shoppingCart')->with('categories', Departments::all()->take(5));
     }
-
-
     public function getCart()
     {
         if (!Session::has('cart')) {
@@ -297,50 +294,50 @@ class PostController extends Controller
 
     }
 
-    public function getCheckout()
-    {
-        if (!Session::has('cart')) {
-            return view('shop.shopping-cart')->with('categories', Departments::all()->take(5))
-                ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
-        }
-
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-        $total = $cart->totalPrice;
-        return view('shop.checkout', ['total' => $total])->with('categories', Departments::all()->take(5))
-            ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
-    }
-
-    public function postCheckout(Request $request)
-    {
-        if (!Session::has('cart')) {
-            return redirect()->route('shop.shoppingCart')->with('categories', Departments::all()->take(5))
-                ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
-        }
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-        Stripe::setApiKey('sk_test_sdJiqY1EpLxwdrMGssocEJax00jC21qpGo');
-        try {
-            $charge = Charge::create(array(
-                "amount" => $cart->totalPrice * 100,
-                "currency" => "usd",
-                "source" => $request->input('stripeToken'), // obtained with Stripe.js
-                "description" => "Test Charge"
-            ));
-            $order = new Order();
-            $order->cart = serialize($cart);
-            $order->address = $request->input('address');
-            $order->name = $request->input('name');
-            $order->payment_id = $charge->id;
-
-            Auth::user()->orders()->save($order);
-        } catch (\Exception $e) {
-            return redirect()->route('checkout')->with('error', $e->getMessage());
-        }
-        Session::forget('cart');
-        return redirect()->route('index')->with('success', 'Successfully purchased Products !')
-            ->with('categories', Departments::all()->take(5));
-    }
+//    public function getCheckout()
+//    {
+//        if (!Session::has('cart')) {
+//            return view('shop.shopping-cart')->with('user',Auth::user())->with('categories', Departments::all()->take(5))
+//                ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
+//        }
+//
+//        $oldCart = Session::get('cart');
+//        $cart = new Cart($oldCart);
+//        $total = $cart->totalPrice;
+//        return view('shop.checkout', ['total' => $total, 'user'=>Auth::user()])->with('categories', Departments::all()->take(5))
+//            ->with('user',Auth::user())->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
+//    }
+//
+//    public function postCheckout(Request $request)
+//    {
+//        if (!Session::has('cart')) {
+//            return redirect()->route('shop.shoppingCart')->with('categories', Departments::all()->take(5))
+//                ->with('user',Auth::user())->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
+//        }
+//        $oldCart = Session::get('cart');
+//        $cart = new Cart($oldCart);
+//        Stripe::setApiKey('sk_test_sdJiqY1EpLxwdrMGssocEJax00jC21qpGo');
+//        try {
+//            $charge = Charge::create(array(
+//                "amount" => $cart->totalPrice * 100,
+//                "currency" => "usd",
+//                "source" => $request->input('stripeToken'), // obtained with Stripe.js
+//                "description" => "Test Charge"
+//            ));
+//            $order = new Order();
+//            $order->cart = serialize($cart);
+//            $order->address = $request->input('address');
+//            $order->name = $request->input('name');
+//            $order->payment_id = $charge->id;
+//
+//            Auth::user()->orders()->save($order);
+//        } catch (\Exception $e) {
+//            return redirect()->route('checkout')->with('error', $e->getMessage());
+//        }
+//        Session::forget('cart');
+//        return redirect()->route('index')->with('user',Auth::user())->with('success', 'Successfully purchased Products !')
+//            ->with('categories', Departments::all()->take(5));
+//    }
 
 
 

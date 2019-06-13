@@ -1,5 +1,5 @@
 @include('include.header')
-  
+
   @if(Session::has('success'))
   <div class="row">
     <div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
@@ -15,10 +15,8 @@
       <div class="container">
         <div class="banner_content row">
           <div class="col-lg-12" style="margin-top: -90px;">
-            {{-- <p class="sub text-uppercase">All : </p> --}}
             <h3><span>Show</span> Your <br />Personal <span>Style</span></h3>
             <h4>find which you want and buy it from us.</h4>
-            {{-- <a href="{{ route('allProduct') }}" class="main_btn mt-40" href="#">View All</a> --}}
             <a class="button3D" href="{{ route('allProduct') }}">
               <span>View All</span>
               <span></span>
@@ -31,7 +29,7 @@
     </div>
   </section>
   <!--================End Home Banner Area =================-->
-  
+
   <!--================ Feature Product Area =================-->
   <br><br>
   <section class="feature_product_area section_gap_bottom_custom">
@@ -73,15 +71,11 @@
                         if ($like->like == 1) {
                             $like_count++;
                         }
-
-
-
                         if (Auth::check()) {
-
                             if ($like->like == 1 && $like->user_id == Auth::user()->id) {
                                 $like_status = "btn-success";
                             }
-                            
+
                         }
 
                     @endphp
@@ -130,26 +124,19 @@
                 @else
                 @php
                     $like_count = 0;
-
                     $like_status = "btn-secondry";
                 @endphp
-
                 @foreach ($second_post->likes as $like)
                     @php
                         if ($like->like == 1) {
                             $like_count++;
                         }
-
-
-
                         if (Auth::check()) {
 
                             if ($like->like == 1 && $like->user_id == Auth::user()->id) {
                                 $like_status = "btn-success";
                             }
-                            
                         }
-
                     @endphp
                 @endforeach
                 <button type="button" data-productid="{{ $second_post->id }}_l" data-like="{{ $like_status }}"
@@ -205,17 +192,11 @@
                         if ($like->like == 1) {
                             $like_count++;
                         }
-
-
-
                         if (Auth::check()) {
-
                             if ($like->like == 1 && $like->user_id == Auth::user()->id) {
                                 $like_status = "btn-success";
                             }
-                            
                         }
-
                     @endphp
                 @endforeach
                 <button type="button" data-productid="{{ $third_post->id }}_l" data-like="{{ $like_status }}"
@@ -325,26 +306,18 @@
                     @else
                     @php
                         $like_count = 0;
-
                         $like_status = "btn-secondry";
                     @endphp
-
                     @foreach ($five_post->likes as $like)
                         @php
                             if ($like->like == 1) {
                                 $like_count++;
                             }
-
-
-
                             if (Auth::check()) {
-
                                 if ($like->like == 1 && $like->user_id == Auth::user()->id) {
                                     $like_status = "btn-success";
                                 }
-                                
                             }
-
                         @endphp
                     @endforeach
                     <button type="button" data-productid="{{ $five_post->id }}_l" data-like="{{ $like_status }}"
@@ -391,26 +364,18 @@
                     @else
                     @php
                         $like_count = 0;
-
                         $like_status = "btn-secondry";
                     @endphp
-
                     @foreach ($sex_post->likes as $like)
                         @php
                             if ($like->like == 1) {
                                 $like_count++;
                             }
-
-
-
                             if (Auth::check()) {
-
                                 if ($like->like == 1 && $like->user_id == Auth::user()->id) {
                                     $like_status = "btn-success";
                                 }
-                                
                             }
-
                         @endphp
                     @endforeach
                     <button type="button" data-productid="{{ $sex_post->id }}_l" data-like="{{ $like_status }}"
@@ -466,17 +431,11 @@
                             if ($like->like == 1) {
                                 $like_count++;
                             }
-
-
-
                             if (Auth::check()) {
-
                                 if ($like->like == 1 && $like->user_id == Auth::user()->id) {
                                     $like_status = "btn-success";
                                 }
-                                
                             }
-
                         @endphp
                     @endforeach
                     <button type="button" data-productid="{{ $seven_post->id }}_l" data-like="{{ $like_status }}"
@@ -523,24 +482,18 @@
                     @else
                     @php
                         $like_count = 0;
-
                         $like_status = "btn-secondry";
                     @endphp
-
                     @foreach ($eight_post->likes as $like)
                         @php
                             if ($like->like == 1) {
                                 $like_count++;
                             }
-
-
-
                             if (Auth::check()) {
-
                                 if ($like->like == 1 && $like->user_id == Auth::user()->id) {
                                     $like_status = "btn-success";
                                 }
-                                
+
                             }
 
                         @endphp
@@ -609,26 +562,19 @@
                 @else
                 @php
                     $like_count = 0;
-
                     $like_status = "btn-secondry";
                 @endphp
-
                 @foreach ($product->likes as $like)
                     @php
                         if ($like->like == 1) {
                             $like_count++;
                         }
-
-
-
                         if (Auth::check()) {
 
                             if ($like->like == 1 && $like->user_id == Auth::user()->id) {
                                 $like_status = "btn-success";
                             }
-                            
                         }
-
                     @endphp
                 @endforeach
                 <button type="button" data-productid="{{ $product->id }}_l" data-like="{{ $like_status }}"
@@ -653,7 +599,7 @@
     </div>
   </section>
   <!--================ End Inspired Product Area =================-->
-  
+
   <!--================ Inspired Product Area 2 =================-->
   <section class="inspired_product_area section_gap_bottom_custom">
     <div class="container">
@@ -686,26 +632,18 @@
                 @else
                 @php
                     $like_count = 0;
-
                     $like_status = "btn-secondry";
                 @endphp
-
                 @foreach ($product2->likes as $like)
                     @php
                         if ($like->like == 1) {
                             $like_count++;
                         }
-
-
-
                         if (Auth::check()) {
-
                             if ($like->like == 1 && $like->user_id == Auth::user()->id) {
                                 $like_status = "btn-success";
                             }
-                            
                         }
-
                     @endphp
                 @endforeach
                 <button type="button" data-productid="{{ $product2->id }}_l" data-like="{{ $like_status }}"
@@ -730,7 +668,7 @@
     </div>
   </section>
   <!--================ End Inspired Product Area 2 =================-->
-  
+
 
   <!--================ Inspired Product Area 3 =================-->
   <section class="inspired_product_area section_gap_bottom_custom">
@@ -764,26 +702,18 @@
                 @else
                 @php
                     $like_count = 0;
-
                     $like_status = "btn-secondry";
                 @endphp
-
                 @foreach ($product3->likes as $like)
                     @php
                         if ($like->like == 1) {
                             $like_count++;
                         }
-
-
-
                         if (Auth::check()) {
-
                             if ($like->like == 1 && $like->user_id == Auth::user()->id) {
                                 $like_status = "btn-success";
                             }
-                            
                         }
-
                     @endphp
                 @endforeach
                 <button type="button" data-productid="{{ $product3->id }}_l" data-like="{{ $like_status }}"
@@ -808,6 +738,6 @@
     </div>
   </section>
   <!--================ End Inspired Product Area 3 =================-->
-  
-  
+
+
 @include('include.footer')

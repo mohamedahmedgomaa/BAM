@@ -1,6 +1,4 @@
 @include('include.header')
-<br><br>
-
 <!--================ Feature Product Area =================-->
 <br><br>
 <section class="feature_product_area section_gap_bottom_custom">
@@ -15,7 +13,6 @@
             </div>
         </div>
         <div class="row">
-
             @if($category->product->count() > 0)
                 @foreach($category->product as $products)
                     <div class="col-lg-4 col-md-6">
@@ -36,26 +33,18 @@
                                     @else
                                     @php
                                         $like_count = 0;
-
                                         $like_status = "btn-secondry";
                                     @endphp
-
                                     @foreach ($products->likes as $like)
                                         @php
                                             if ($like->like == 1) {
                                                 $like_count++;
                                             }
-
-
-
                                             if (Auth::check()) {
-
                                                 if ($like->like == 1 && $like->user_id == Auth::user()->id) {
                                                     $like_status = "btn-success";
                                                 }
-                                                
                                             }
-
                                         @endphp
                                     @endforeach
                                     <button type="button" data-productid="{{ $products->id }}_l" data-like="{{ $like_status }}"
@@ -89,23 +78,6 @@
         </div>
         <hr>
         <br>
-        
-        {{-- @if($prev)
-            <a href="{{ route('category.show', ['id' => $prev->id]) }}">
-                <button type="button" class="btn btn-danger"><span class="fa fa-chevron-left"></span> Prev
-                    => {{ $prev->name }} </button>
-            </a>
-        @endif
-        <a href="/homepage">
-            <button type="button" class="btn btn-info">Back HomePage</button>
-        </a>
-
-        @if($next)
-            <a href="{{ route('category.show', ['id' => $next->id]) }}">
-                <button type="button" class="btn btn-danger">Next => {{ $next->name }} <span
-                            class="fa fa-chevron-right"></span></button>
-            </a>
-        @endif --}}
     </div>
     <div class="buttonstyles">
         @if($prev)

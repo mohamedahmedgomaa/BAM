@@ -17,13 +17,11 @@ class ProductsDatatable extends DataTable
     {
         return datatables($query)
             ->addColumn('checkbox', 'admin.products.btn.checkbox')
-            ->addColumn('color', 'admin.products.btn.color')
             ->addColumn('edit', 'admin.products.btn.edit')
             ->addColumn('delete', 'admin.products.btn.delete')
             ->rawColumns([
                 'edit',
                 'delete',
-                'color',
                 'checkbox',
             ]);
     }
@@ -126,18 +124,6 @@ class ProductsDatatable extends DataTable
                 'name'  => 'price',
                 'data'  => 'price',
                 'title' => trans('admin.price'),
-            ],[
-                'name'  => 'color',
-                'data'  => 'color',
-                'title' => trans('admin.color'),
-            ],[
-                'name'  => 'size',
-                'data'  => 'size',
-                'title' => trans('admin.size'),
-            ],[
-                'name'  => 'weight',
-                'data'  => 'weight',
-                'title' => trans('admin.weight'),
             ],[
                 'name'  => 'created_at',
                 'data'  => 'created_at',

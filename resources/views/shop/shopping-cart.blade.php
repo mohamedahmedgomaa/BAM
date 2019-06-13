@@ -34,7 +34,7 @@
                 <a href="{{ route('checkout') }}" type="button" class="btn btn-success">Checkout</a>
             </div>
         </div>
-        <br>
+        <br><br>
     @else
         <h2 class="alert">
             <a class="alert alert-danger" style="color: #000" href="{{url('')}}">No Item In Cart !!</a>
@@ -43,6 +43,3 @@
 </div>
 
 @include('include.footer')
-
-
-
