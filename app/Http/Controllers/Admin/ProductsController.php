@@ -29,7 +29,7 @@ class ProductsController extends Controller
     public function create()
     {
         //
-        return view('admin.products.create', ['title' => trans('admin.add')]);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -41,31 +41,31 @@ class ProductsController extends Controller
     public function store()
     {
         //
-        $data = $this->validate(request(),
-            [
-                'title' => 'required',
-                'photo' => 'required|' . v_image(),
-                'content' => 'required',
-                'price' => 'required|numeric',
-                'user_id' => 'nullable|numeric',
-            ], [], [
-                'title' => trans('admin.title'),
-                'photo' => trans('admin.photo'),
-                'content' => trans('admin.content'),
-                'price' => trans('admin.price'),
-                'user_id' => trans('admin.user_id'),
-            ]);
-        if (request()->hasFile('photo')) {
-            $data['photo'] = up()->upload([
-                'file' => 'photo',
-                'path' => 'products',
-                'upload_type' => 'single',
-                'delete_file' => '',
-            ]);
-        }
-        Product::create($data);
-        session()->flash('success', trans('admin.record_added'));
-        return redirect(aurl('products'));
+        // $data = $this->validate(request(),
+        //     [
+        //         'title' => 'required',
+        //         'photo' => 'required|' . v_image(),
+        //         'content' => 'required',
+        //         'price' => 'required|numeric',
+        //         'user_id' => 'nullable|numeric',
+        //     ], [], [
+        //         'title' => trans('admin.title'),
+        //         'photo' => trans('admin.photo'),
+        //         'content' => trans('admin.content'),
+        //         'price' => trans('admin.price'),
+        //         'user_id' => trans('admin.user_id'),
+        //     ]);
+        // if (request()->hasFile('photo')) {
+        //     $data['photo'] = up()->upload([
+        //         'file' => 'photo',
+        //         'path' => 'products',
+        //         'upload_type' => 'single',
+        //         'delete_file' => '',
+        //     ]);
+        // }
+        // Product::create($data);
+        // session()->flash('success', trans('admin.record_added'));
+        // return redirect(aurl('products'));
     }
 
     /**
@@ -89,7 +89,8 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
         $title = trans('admin.edit');
-        return view('admin.products.edit', compact('product', 'title'));
+        return view('admin.products.index', compact('product', 'title')); // 
+        
     }
 
     /**
@@ -102,31 +103,31 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = $this->validate(request(),
-            [
-                'title' => 'required',
-                'photo' => 'required|' . v_image(),
-                'content' => 'required',
-                'price' => 'required|numeric',
-                'user_id' => 'nullable|numeric',
-            ], [], [
-                'title' => trans('admin.title'),
-                'photo' => trans('admin.photo'),
-                'content' => trans('admin.content'),
-                'price' => trans('admin.price'),
-                'user_id' => trans('admin.user_id'),
-            ]);
-        if (request()->hasFile('photo')) {
-            $data['photo'] = up()->upload([
-                'file' => 'photo',
-                'path' => 'products',
-                'upload_type' => 'single',
-                'delete_file' => '',
-            ]);
-        }
-        Product::where('id', $id)->update($data);
-        session()->flash('success', trans('admin.updated_record'));
-        return redirect(aurl('products'));
+        // $data = $this->validate(request(),
+        //     [
+        //         'title' => 'required',
+        //         'photo' => 'required|' . v_image(),
+        //         'content' => 'required',
+        //         'price' => 'required|numeric',
+        //         'user_id' => 'nullable|numeric',
+        //     ], [], [
+        //         'title' => trans('admin.title'),
+        //         'photo' => trans('admin.photo'),
+        //         'content' => trans('admin.content'),
+        //         'price' => trans('admin.price'),
+        //         'user_id' => trans('admin.user_id'),
+        //     ]);
+        // if (request()->hasFile('photo')) {
+        //     $data['photo'] = up()->upload([
+        //         'file' => 'photo',
+        //         'path' => 'products',
+        //         'upload_type' => 'single',
+        //         'delete_file' => '',
+        //     ]);
+        // }
+        // Product::where('id', $id)->update($data);
+        // session()->flash('success', trans('admin.updated_record'));
+        // return redirect(aurl('products'));
     }
 
     /**

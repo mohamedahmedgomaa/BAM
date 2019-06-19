@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="{{ url('/') }}/design/adminlte/dist/css/rtl/rtl.css">
   <link href="https://fonts.googleapis.com/css?family=Cairo:300,400&amp;subset=arabic,latin-ext" rel="stylesheet">
   <style type="text/css">
-    html,body,h1,h2,h3,h4,h5,h6, {
+    html,body,h1,h2,h3,h4,h5,h6 {
       font-family: 'Cairo', sans-serif;
     }
   </style>

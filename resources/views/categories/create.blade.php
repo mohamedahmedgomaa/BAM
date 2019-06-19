@@ -1,39 +1,32 @@
-@extends('layouts.app')
+@extends('home')
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+    <div class="container">
 
-                <div class="panel-body">                  
-
-                  
-                    <form class="" action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                    <br>
-                      <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Tilte Post">
-                      </div>
-                      
-                      <button type="submit" class="btn btn-info">Save</button>
-                    </form>
-                    
-        
-                    
-                    <div>
-                        @foreach ($errors->all() as $error)
-                                    <span class="help-block">
-                                        <strong>{{ $error }}</strong>
-                                    </span>
-                        @endforeach
-                    </div>
-
-
-                </div>
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger">
+                <span class="help-block">
+                    <strong>{{ $error }}</strong>
+                </span>
             </div>
-        </div>
+        @endforeach
+
+        <form class="" action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <br>
+            <div class="form-group">
+                <h3 style="color: #71cd14" for="name">Name Category:</h3>
+                <input name="name" style="color: #71cd14" class="form-control form-control-lg" id="name" type="text"
+                       placeholder="Name Category">
+            </div>
+
+            <button type="submit" style="margin-top: 10px; margin-left: 30px" class="button3D">
+                <span>Save</span>
+                <span></span>
+                <span></span>
+                <span>Save</span>
+            </button>
+        </form>
     </div>
-</div>
+
+    <br><br><br><br><br><br>
 @endsection

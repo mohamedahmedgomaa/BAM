@@ -17,7 +17,7 @@ class UserController extends Controller
     //
     public function profile($id)
     {
-        $user = User::with('product')->find($id);
+        $user = User::with('product')->findOrFail($id);
         $orders = Auth::user()->orders;
         $orders->transform(function ($order, $key) {
             $order->cart = unserialize($order->cart);

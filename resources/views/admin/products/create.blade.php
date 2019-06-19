@@ -30,6 +30,10 @@
                 {!! Form::label('user_id', trans('admin.user_id')) !!}
                 {!! Form::select('user_id', App\User::pluck('name', 'id') , old('user_id'), ['class'=>'form-control', 'placeholder' => '..............']) !!}
             </div>
+            <div class="form-group">
+                {!! Form::label('department_id', trans('admin.department_id')) !!}
+                {!! Form::select('department_id', App\Departments::pluck('name', 'id') , old('department_id'), ['class'=>'form-control', 'placeholder' => '..............']) !!}
+            </div>
 
             {!! Form::submit(trans('admin.add'), ['class'=>'btn btn-primary']) !!}
             {!! Form::close() !!}

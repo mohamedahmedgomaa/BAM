@@ -32,6 +32,9 @@ Route::group(['middleware' => 'user:web'], function () {
     Route::post('/checkout', 'siteUIcontroller@postCheckout')->name('postcheckout');
 
     Route::post('/homepage/{product}/store', 'CommentController@store');
+    Route::get('/comment/delete/{id}', 'CommentController@delete');
+    Route::get('/comment/edit/{id}', 'CommentController@edit');
+    Route::post('/comment/update/{id}', 'CommentController@update');
     Route::get('/homepage', 'PostController@products')->name('homepage');
     
     //////////////////// Roles Admin Shop ////////////////////////
@@ -55,6 +58,8 @@ Route::group(['middleware' => 'user:web'], function () {
         Route::post('/homepage/update/{id}', 'PostController@update');
     });
     //////////////////// Roles Admin Shop ////////////////////////
+
+
 });
 Route::group(['middleware' => 'Maintenance'], function () {
     Route::get('/', function () {
@@ -105,6 +110,9 @@ Route::get('/shopshow', 'siteUIcontroller@shopshow')->name('shopshow');
 //////////////  allUsers show ///////////////
 Route::get('/allusers', 'siteUIcontroller@allusers')->name('allusers');
 //////////////  allUsers show ///////////////
+
+Route::get('/contactus/about', 'siteUIcontroller@about')->name('contactus.about');
+Route::get('/contactus/team', 'siteUIcontroller@team')->name('contactus.team');
 
 Route::get('/allProduct', 'siteUIcontroller@allProduct')->name('allProduct');
 //Route::get('/pagenotfound', 'HomeController@pagenotfound')->name('notfounds');

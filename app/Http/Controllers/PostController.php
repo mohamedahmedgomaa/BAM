@@ -27,19 +27,23 @@ class PostController extends Controller
         $topTenProductByLikes = Product::withCount(['likes', 'comments'])
             ->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->get();
         return view('homepage', compact(['products', 'topTenProductByLikes']))
-            ->with('departments', Departments::all());
+            ->with('departments', Departments::all())
+            ->with('categories', Departments::all()->take(5))
+            ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
     }
 
    
     public function product(Product $products, $id)
     {
-        $products = Product::find($id);
+        $products = Product::findOrFail($id);
         $next_page = Product::where('id', '>', $products->id)->min('id');
         $prev_page = Product::where('id', '<', $products->id)->max('id');
         return view('product')->with('product', $products)
             ->with('categories', Departments::all()->take(5))
             ->with('next', Product::find($next_page))
-            ->with('prev', Product::find($prev_page));
+            ->with('prev', Product::find($prev_page))
+            ->with('categories', Departments::all()->take(5))
+            ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
     }
     
     public function createProduct() {
@@ -92,7 +96,7 @@ class PostController extends Controller
 
     public function delete($id)
     {
-        $products = Product::find($id);
+        $products = Product::findOrFail($id);
         if ($products->user_id == auth()->id()) {
             $products->delete();
             return redirect('/homepage');
@@ -102,9 +106,9 @@ class PostController extends Controller
 
     public function edit($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         if ($product->user_id == auth()->id()) {
-            return view('edit')->with('products', $product)->with('categories', Departments::all()->take(5))
+            return view('edit')->with('products', $product)->with('departments', Departments::all())->with('categories', Departments::all()->take(5))
                 ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
         }
         abort('404');
@@ -113,7 +117,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
 
         if ($product->user_id == auth()->id()) {
             $this->validate($request, [
@@ -419,7 +423,8 @@ class PostController extends Controller
         );
 
 
-        return view('statistics', compact('statistics'))->with('categories', Departments::all()->take(5));
+        return view('statistics', compact('statistics'))->with('categories', Departments::all()->take(5))
+        ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
     }
 
 

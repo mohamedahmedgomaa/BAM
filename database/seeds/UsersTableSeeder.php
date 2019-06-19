@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2019-01-01 00:37:09',
             ],[
                 'name' => 'moasha gomaa',
-                'email' => 'edgasom@bam.com',
+                'email' => 'bam@bam.com',
                 'password' => bcrypt('123456'),
                 'mobile' => '0000000000',
                 'address' => 'mans',

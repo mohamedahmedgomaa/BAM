@@ -7,7 +7,6 @@
     <link rel="icon" href="img/favicon.png" type="image/png"/>
     <title>BAM</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('css/freelancer.min.css') }}"/>
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <link rel="stylesheet" href="/vendors/linericon/style.css"/>
     <link rel="stylesheet" href="/css/font-awesome.min.css"/>
@@ -24,9 +23,6 @@
     <link rel="stylesheet" href="{{ asset('css/buttonstyle.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/button3D.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/stylebutton.css') }}"/>
-     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
         @yield('styles')
 </head>
 <body>
@@ -178,7 +174,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Contact us</a>
+                                    <a class="nav-link" href="{{ route('contactus.about') }}">Contact us</a>
                                 </li>
                             </ul>
                         </div>

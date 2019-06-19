@@ -17,10 +17,8 @@ class ProductsDatatable extends DataTable
     {
         return datatables($query)
             ->addColumn('checkbox', 'admin.products.btn.checkbox')
-            ->addColumn('edit', 'admin.products.btn.edit')
             ->addColumn('delete', 'admin.products.btn.delete')
             ->rawColumns([
-                'edit',
                 'delete',
                 'checkbox',
             ]);
@@ -34,7 +32,7 @@ class ProductsDatatable extends DataTable
      */
     public function query()
     {
-        return Product::query()->with('user')->select('products.*');
+        return Product::query()->with('user')->with('category')->select('products.*');
     }
 
 
@@ -54,13 +52,6 @@ class ProductsDatatable extends DataTable
                         'dom'        => 'Blfrtip',
                         'lengthMenu' => [[10,25,50,100], [10,25,50, trans('admin.all_record')]],
                         'buttons'    =>[
-                            [
-                                'text' => '<i class="fa fa-plus"></i> '. trans('admin.add'),
-                                 'className' => 'btn btn-info',"action"=>"function(){
-                                    window.location.href = '". \URL::current() ."/create';
-                                 }"
-                            ],
-                            
                             ['extend'   => 'print', 'className' => 'btn btn-primary', 
                                                         'text' => '<i class="fa fa-print"></i>'],
                             ['extend'   => 'csv', 'className' => 'btn btn-info',
@@ -121,6 +112,10 @@ class ProductsDatatable extends DataTable
                 'data'  => 'user.name',
                 'title' => trans('admin.user_id'),
             ],[
+                'name'  => 'category.name',
+                'data'  => 'category.name',
+                'title' => trans('admin.category_id'),
+            ],[
                 'name'  => 'price',
                 'data'  => 'price',
                 'title' => trans('admin.price'),
@@ -132,15 +127,6 @@ class ProductsDatatable extends DataTable
                 'name'  => 'updated_at',
                 'data'  => 'updated_at',
                 'title' => trans('admin.updated_at'),
-            ],[
-                'name'          => 'edit',
-                'data'          => 'edit',
-                'title'         => trans('admin.edit'),
-                'exportable'    => false,
-                'printable'     => false,
-                'orderable'     => false,
-                'searchable'    => false,
-
             ],[
                 'name'          => 'delete',
                 'data'          => 'delete',

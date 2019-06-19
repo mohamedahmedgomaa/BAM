@@ -153,7 +153,6 @@
           </a>
           <ul class="treeview-menu" style="{{ active_menu('products')[1] }}">
             <li class=""><a href="{{ aurl('products') }}"><i class="fa fa-info-circle"></i>{{ trans('admin.products') }}</a></li>
-            <li class=""><a href="{{ aurl('products/create') }}"><i class="fa fa-plus"></i>{{ trans('admin.add') }}</a></li>
           </ul>
         </li>
         

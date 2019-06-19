@@ -25,9 +25,9 @@ class siteUIcontroller extends Controller
             ->with('sex_post', Product::orderBy('created_at', 'desc')->skip(5)->take(1)->get()->first())
             ->with('seven_post', Product::orderBy('created_at', 'desc')->skip(6)->take(1)->get()->first())
             ->with('eight_post', Product::orderBy('created_at', 'desc')->skip(7)->take(1)->get()->first())
-            ->with('category1', Departments::findOrFail(1))
-            ->with('category2', Departments::findOrFail(2))
-            ->with('category3', Departments::findOrFail(3))
+            ->with('category1', Departments::find(1))
+            ->with('category2', Departments::find(2))
+            ->with('category3', Departments::find(3))
             ->with('settings', Setting::all())
             ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
     }
@@ -137,4 +137,15 @@ class siteUIcontroller extends Controller
         return redirect()->route('index')->with('success', 'Successfully purchased Products !')
             ->with('categories', Departments::all()->take(5));
     }
+
+    public function about() {
+        return view('contactus.about')->with('categories', Departments::all()->take(5))
+                ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
+    }
+
+    public function team() {
+        return view('contactus.team')->with('categories', Departments::all()->take(5))
+                ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get());
+    }
+
 }

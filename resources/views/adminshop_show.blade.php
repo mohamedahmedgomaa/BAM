@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
 	<div class="row">
-			@if($shopshow->count() > 0)
+		@if($shopshow->count() > 0)
 		    @foreach($shopshow as $shopshows)
 		        <div class="col-lg-4 col-md-6">
 		            <div class="single-product">

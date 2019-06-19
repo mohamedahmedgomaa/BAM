@@ -12,7 +12,12 @@
                 @if($user->id == auth()->id())
                         <form enctype="multipart/form-data" action="/profile/{{ $user->id }}" method="POST">
                             <label>Update Profile Image</label>
-                            <input type="file" name="avatar">
+                            <input type="file" required name="avatar">
+                            @if ($errors->has('avatar'))
+                                <span class="alert alert-danger help-block">
+                                    <strong>{{ $errors->first('avatar') }}</strong>
+                                </span>
+                            @endif
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="submit" value="Save" class="pull-right btn btn-sm btn-primary">
                         </form>
@@ -23,23 +28,33 @@
                     <a href="/profile/edit/{{ $user->id }}" class="btn btn-info">
                         <i class="fa fa-edit"> Edit User {{ $user->name }}</i>
                     </a>
-                    {{-- @foreach($orders as $order)
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <ul class="list-group">
-                                    @foreach($order->cart->items as $item)
-                                    <li class="list-group-item">
-                                        <span class="badge">{{ $item['price'] }} $</span>
-                                        {{ $item['item']['title'] }} | {{ $item['qty'] }} Units
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <div class="panel-footer">
-                                <strong>Total Price: {{ $order->cart->totalPrice }} $</strong>
-                            </div>
-                        </div>
-                    @endforeach --}}
+{{--                    @foreach($orders as $order)--}}
+                    @if($orders->count() > 0)
+                        <table style="background: #71CD14; color: #fff; font-family: 'Arial Black', arial-black; font-size: 18px" class="table table-bordered table-success">
+                      <thead>
+                        <tr style="background: #fff; color: #71CD14">
+                          <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Product Number</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach($orders as $order)
+                        <tr>
+                          <th scope="row">{{ $order->id }}</th>
+                            <th scope="row">{{ $order->name }}</th>
+                            <th scope="row">{{ $order->address }}</th>
+                            <th scope="row">{{ $order->total }}</th>
+                            <th scope="row">{{ $order->totalqty }}</th>
+
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                    @endif
+{{--                    @endforeach--}}
                 @endif
                 @if(auth()->id() != $user->id)
                 <a href="{{ route('profile.send.message',['id'=>$user->id]) }}" class="btn btn-info">
@@ -48,8 +63,9 @@
                 @endif
 
         </div>
+        <h1>comments count: {{$user->comments->count()}}</h1>
         <div>
-            @foreach ($product as $products)
+        @foreach ($product as $products)
                 <h2>
                     <a href="/homepage/{{ $products->id }}">{{ $products->title }}</a>
                 </h2>

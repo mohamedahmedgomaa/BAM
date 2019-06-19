@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Product;
 use Illuminate\Http\Request;
 use App\Departments;
 
@@ -14,7 +15,8 @@ class CatrgoriesController extends Controller
      */
     public function index()
     {
-        return view('categories.index')->with('departments',Departments::all());
+        return view('categories.index')->with('departments',Departments::all())->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
+            ->with('categories', Departments::all()->take(5));
     }
 
     /**
@@ -24,7 +26,8 @@ class CatrgoriesController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('categories.create')->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
+            ->with('categories', Departments::all()->take(5));
     }
 
     /**
