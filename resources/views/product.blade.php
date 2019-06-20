@@ -1,7 +1,7 @@
 @extends('home')
 @section('content')
 
-<div style="height: 1500px;overflow: hidden">
+<div style="overflow: hidden">
 <div class="col-lg-12">         
  <div class="single-product">
     <div class="product-img" style="">
@@ -104,7 +104,7 @@
 </div>
 
       <hr style="margin-top: 100px;">
-<div class="container" style="overflow: hidden;margin-bottom: 500px;margin-top: 50px">
+<div class="container" style="overflow: hidden;">
     <div class="row">
     <div class="col-md-12">
 
@@ -123,6 +123,7 @@
           
             <button type="submit" class="btn btn-info">Add Comment</button>
         </form>
+        @if($product->comments->count() > 0)
         <hr>
         <h4>Comments :</h4>
         <div class="comments" style="height: 460px;overflow: scroll;">
@@ -149,6 +150,7 @@
             </div>
             @endforeach
         </div>
+        @endif
     </div>
          {{-- @include('include.disqus') --}}
     </div>

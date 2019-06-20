@@ -1,5 +1,5 @@
 <!--================ start footer Area  =================-->
-  <footer class="footer-area section_gap">
+  <footer class="footer-area section_gap" style="margin-top: 0px;overflow: hidden">
     <div class="container">
       <div class="row">
         <div class="col-lg-2 col-md-6 single-footer-widget">
