@@ -12,15 +12,15 @@
           
           <div class="form-group">
             {!! Form::label('comment', trans('admin.comment')) !!}
-            {!! Form::textarea('comment', old('comment'), ['class'=>'form-control']) !!}       
+            {!! Form::textarea('comment', old('comment'), ['class'=>'form-control', 'required' => 'required']) !!}       
           </div>
           <div class="form-group">
             {!! Form::label('user_id', trans('admin.user_id')) !!}
-            {!! Form::select('user_id',App\User::pluck('name', 'id') , old('user_id'), ['class'=>'form-control', 'placeholder' => '..............']) !!}       
+            {!! Form::select('user_id',App\User::pluck('name', 'id') , old('user_id'), ['class'=>'form-control', 'placeholder' => '..............', 'required' => 'required']) !!}       
           </div>
           <div class="form-group">
             {!! Form::label('product_id', trans('admin.product_id')) !!}
-            {!! Form::select('product_id',App\Model\Product::pluck('title', 'id') , old('product_id'), ['class'=>'form-control', 'placeholder' => '..............']) !!}       
+            {!! Form::select('product_id',App\Model\Product::pluck('title', 'id') , old('product_id'), ['class'=>'form-control', 'placeholder' => '..............', 'required' => 'required']) !!}       
           </div>
           
           {!! Form::submit(trans('admin.add'), ['class'=>'btn btn-primary']) !!}

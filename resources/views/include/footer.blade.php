@@ -32,7 +32,7 @@
         </div>
         {{-- @if(Auth::check()) --}}
         <div class="col-lg-2 col-md-6 single-footer-widget">
-          <h4>Categorys</h4>
+          <h4>Categories</h4>
           <ul>
             @foreach($categories as $category)
 
@@ -44,7 +44,19 @@
           </ul>
         </div>
         {{-- @endif --}}
-        
+       <div class="col-md-6 single-footer-widget">
+          <h4>Search Post</h4>
+          <p>You can trust us. we only send promo offers,</p>
+          <div class="form-wrap">
+            <form target="_blank" method="GET" action="/results" class="form-inline">
+              {{ csrf_field() }}
+              <input type="text" class="form-control" name="search" placeholder="Your Post Search" onfocus="this.placeholder = ''"
+                onblur="this.placeholder = 'Your Post Search '">
+              <button class="click-btn btn btn-default">Search</button>
+              
+            </form>
+          </div>
+        </div>
       </div>
       <div class="footer-bottom row align-items-center">
         <p class="footer-text m-0 col-lg-8 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

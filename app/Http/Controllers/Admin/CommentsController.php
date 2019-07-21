@@ -44,8 +44,8 @@ class CommentsController extends Controller
         $data = $this->validate(request(), 
             [
                 'comment'               => 'required', 
-                'product_id'            => 'sometimes|nullable|numeric',
-                'user_id'               => 'sometimes|nullable|numeric',
+                'product_id'            => 'required|numeric',
+                'user_id'               => 'required|numeric',
             ],[],[
                 'comment'               => trans('admin.comment'),
                 'product_id'            => trans('admin.product_id'), 
@@ -93,8 +93,8 @@ class CommentsController extends Controller
         $data = $this->validate(request(), 
             [
                 'comment'               => 'required', 
-                'product_id'            => 'sometimes|nullable|numeric',
-                'user_id'               => 'sometimes|nullable|numeric',
+                'product_id'            => 'required|numeric',
+                'user_id'               => 'required|numeric',
             ],[],[
                 'comment'               => trans('admin.comment'),
                 'product_id'            => trans('admin.product_id'), 

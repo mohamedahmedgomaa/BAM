@@ -121,11 +121,13 @@ class PostController extends Controller
 
         if ($product->user_id == auth()->id()) {
             $this->validate($request, [
-                'title'     => 'required',
-                'content'   => 'required',
-                'photo'     => 'required|image|mimes:jpg,jpeg,gif,png|max:15084',
-                'price'     => 'required|numeric',
-                'offer'     => 'sometimes|nullable|numeric',
+                'title' => 'required',
+                'content' => 'required',
+                'category_id' => 'required',
+                'photo' => 'nullable|image|mimes:jpg,jpeg,gif,png|max:4084',
+                'price' => 'required|numeric',
+                'user_id' => 'nullable|numeric',
+                'offer'   => 'nullable|numeric',
             ]);
 
             if ($request->hasFile('photo')) {
@@ -139,7 +141,13 @@ class PostController extends Controller
             $product->title = request('title');
             $product->content = request('content');
             $product->price = request('price');
-            $product->offer = request('offer');
+            $product->category_id = request('category_id');
+            if ($request->offer > 0) {
+                $product->offer = request('offer');
+            } else {
+                $product->offer = 0;
+            }
+            $product->user_id = auth()->id();
 
             $product->save();
 

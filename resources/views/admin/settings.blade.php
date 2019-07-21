@@ -25,16 +25,16 @@
           <div class="form-group">
             {!! Form::label('logo', trans('admin.logo')) !!}
             {!! Form::file('logo',  ['class'=>'form-control']) !!}  
-            @if(!empty(setting()->logo))
+            {{-- @if(!empty(setting()->logo))
               <img src="{{ Storage::url(setting()->logo) }}" style="width:50px;height: 50px;">
-            @endif     
+            @endif   --}}   
           </div>
           <div class="form-group">
             {!! Form::label('icon', trans('admin.icon')) !!}
             {!! Form::file('icon', ['class'=>'form-control']) !!} 
-            @if(!empty(setting()->icon))
+            {{-- @if(!empty(setting()->icon))
               <img src="{{ Storage::url(setting()->icon) }}" style="width:50px;height: 50px;">
-            @endif       
+            @endif --}}       
           </div>
           <div class="form-group">
             {!! Form::label('description', trans('admin.description')) !!}

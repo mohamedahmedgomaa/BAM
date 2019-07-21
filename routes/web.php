@@ -54,8 +54,8 @@ Route::group(['middleware' => 'user:web'], function () {
         Route::get('/category/delete/{id}', 'CatrgoriesController@destroy')->name('category.delete');
 */
         Route::get('/homepage/delete/{id}', 'PostController@delete');
-        Route::get('/homepage/edit/{id}', 'PostController@edit');
-        Route::post('/homepage/update/{id}', 'PostController@update');
+        Route::get('/homepage/edit/{id}', 'PostController@edit')->name('post.edit');
+        Route::post('/homepage/update/{id}', 'PostController@update')->name('post.update');
     });
     //////////////////// Roles Admin Shop ////////////////////////
 

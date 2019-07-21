@@ -113,7 +113,9 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if ($user->id == auth()->id()) {
-            return view('users.edit')->with('users', $user);
+            return view('users.edit')->with('users', $user)
+                ->with('footerTopProduct', Product::withCount(['likes', 'comments'])->orderBy('likes_count', 'desc')->orderBy('comments_count', 'desc')->limit(5)->get())
+                ->with('categories', Departments::all()->take(5));
         }
         abort('404');
     }

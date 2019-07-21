@@ -95,5 +95,6 @@ return [
 	'password'						=> 'Password',
 	'mobile'						=> 'Mobile',
 	'address'						=> 'Address',
+	'offer'							=> 'Offer',
 	'category_id'					=> 'Category Id',
 ];

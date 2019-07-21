@@ -44,8 +44,8 @@ class MessagesController extends Controller
         $data = $this->validate(request(), 
             [
                 'text'               => 'required',
-                'from'             => 'nullable|numeric',
-                'to'             => 'nullable|numeric',
+                'from'             => 'required|numeric',
+                'to'             => 'required|numeric',
             ],[],[
                 'text'               => trans('admin.text'),
                 'from'             => trans('admin.from'), 
@@ -93,8 +93,8 @@ class MessagesController extends Controller
         $data = $this->validate(request(), 
             [
                 'text'               => 'required',
-                'from'             => 'nullable|numeric',
-                'to'             => 'nullable|numeric',
+                'from'             => 'required|numeric',
+                'to'             => 'required|numeric',
             ],[],[
                 'text'               => trans('admin.text'),
                 'from'             => trans('admin.from'), 

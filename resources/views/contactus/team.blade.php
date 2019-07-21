@@ -183,7 +183,7 @@ body{
                             </div>
 
 
-                            <div class="testimonial-photo"><img alt="" src="{{ asset('') }}img/Hamdy.jpg"></div>
+                            <div class="testimonial-photo"><img alt="" style="border-radius: 50%;width: 70px" src="{{ asset('') }}img/hamdy.jfif"></div>
                             <h5 class="text-capitalize color-black mt-3 mb-1">Ahmed Hamdy</h5>
                             <p class="color-pink">Web Designer</p>
                         </div>

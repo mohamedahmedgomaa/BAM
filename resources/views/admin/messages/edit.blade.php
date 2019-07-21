@@ -11,15 +11,15 @@
     		{!! Form::open(['url'=>aurl('messages/'.$message->id), 'method'=>'put']) !!} 
           <div class="form-group">
             {!! Form::label('text', trans('admin.text')) !!}
-            {!! Form::textarea('text', $message->text, ['class'=>'form-control']) !!}       
+            {!! Form::textarea('text', $message->text, ['class'=>'form-control', 'required' => 'required']) !!}       
           </div>
           <div class="form-group">
             {!! Form::label('from', trans('admin.from')) !!}
-            {!! Form::select('from', App\User::pluck('name', 'id') , $message->from, ['class'=>'form-control', 'placeholder' => '..............']) !!}       
+            {!! Form::select('from', App\User::pluck('name', 'id') , $message->from, ['class'=>'form-control', 'placeholder' => '..............', 'required' => 'required']) !!}       
           </div>
           <div class="form-group">
             {!! Form::label('to', trans('admin.to')) !!}
-            {!! Form::select('to', App\User::pluck('name', 'id') , $message->to, ['class'=>'form-control', 'placeholder' => '..............']) !!}       
+            {!! Form::select('to', App\User::pluck('name', 'id') , $message->to, ['class'=>'form-control', 'placeholder' => '..............', 'required' => 'required']) !!}       
           </div>
 
           {!! Form::submit(trans('admin.save'), ['class'=>'btn btn-primary']) !!}

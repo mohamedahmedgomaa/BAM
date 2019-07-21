@@ -12,15 +12,15 @@
           
           <div class="form-group">
             {!! Form::label('text', trans('admin.text')) !!}
-            {!! Form::textarea('text', old('text'), ['class'=>'form-control']) !!}       
+            {!! Form::textarea('text', old('text'), ['class'=>'form-control', 'required' => 'required']) !!}       
           </div>
           <div class="form-group">
             {!! Form::label('from', trans('admin.from')) !!}
-            {!! Form::select('from',App\User::pluck('name', 'id') , old('from'), ['class'=>'form-control', 'placeholder' => '..............']) !!}       
+            {!! Form::select('from',App\User::pluck('name', 'id') , old('from'), ['class'=>'form-control', 'required' => 'required', 'placeholder' => '..............']) !!}       
           </div>
           <div class="form-group">
             {!! Form::label('to', trans('admin.to')) !!}
-            {!! Form::select('to',App\User::pluck('name', 'id') , old('to'), ['class'=>'form-control', 'placeholder' => '..............']) !!}       
+            {!! Form::select('to',App\User::pluck('name', 'id') , old('to'), ['class'=>'form-control', 'required' => 'required', 'placeholder' => '..............']) !!}       
           </div>
           
           {!! Form::submit(trans('admin.add'), ['class'=>'btn btn-primary']) !!}
